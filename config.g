@@ -54,20 +54,15 @@ M906 X1700 Y1700 Z800 E600 I30                   ; set motor currents (mA) and m
 M84 X Y Z E0 S30                                 ; Set idle timeout
 
 ; Axis accelerations and speeds
-M566 X300 Y300 Z12 P1                            ; set maximum instantaneous speed changes (mm/min)
-M203 X18000 Y18000 Z900                          ; set maximum speeds (mm/min)
-M201 X7000 Y7000.00 Z150                         ; set accelerations (mm/s^2)
-
-; Extruder accelerations and speeds
-M566 E8500 P1                                    ; 450 Set maximum instantaneous speed changes (mm/min) and jerk policy
-M203 E7200                                       ; Set maximum speeds (mm/min)
-M201 E1500                                       ; Set accelerations (mm/s²)
+M566 X300 Y300 Z30 E8000                         ; set maximum instantaneous speed changes (mm/min)
+M203 X27000 Y27000 Z900 E15000                   ; set maximum speeds (mm/min)
+M201 X7000 Y4500.00 Z150 E1800                   ; set accelerations (mm/s^2)
 
 ; Reduced accelerations
 M201.1 X500 Y500 Z80 E500                        ; Set reduced acceleration for special move types (mm/s²)
 
 ; Printing and travel accelerations
-M204 P5000 T7000                                 ; Set printing acceleration and travel accelerations (mm/s²)
+M204 P3000 T5500                                 ; Set printing acceleration and travel accelerations (mm/s²)
 
 
 ; Axis Limits

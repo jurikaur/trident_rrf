@@ -59,7 +59,7 @@ M203 X18000 Y18000 Z900                          ; set maximum speeds (mm/min)
 M201 X7000 Y7000.00 Z150                         ; set accelerations (mm/s^2)
 
 ; Extruder accelerations and speeds
-M566 E450 P1                                     ; Set maximum instantaneous speed changes (mm/min) and jerk policy
+M566 E8500 P1                                    ; 450 Set maximum instantaneous speed changes (mm/min) and jerk policy
 M203 E7200                                       ; Set maximum speeds (mm/min)
 M201 E1500                                       ; Set accelerations (mm/s²)
 
