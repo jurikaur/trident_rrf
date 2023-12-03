@@ -54,15 +54,15 @@ M906 X1700 Y1700 Z800 E600 I30                   ; set motor currents (mA) and m
 M84 X Y Z E0 S30                                 ; Set idle timeout
 
 ; Axis accelerations and speeds
-M566 X300 Y300 Z30 E8000                         ; set maximum instantaneous speed changes (mm/min)
-M203 X27000 Y27000 Z900 E15000                   ; set maximum speeds (mm/min)
-M201 X7000 Y4500.00 Z150 E1800                   ; set accelerations (mm/s^2)
+M566 X300 Y300 Z30 E300 P1                       ; set maximum instantaneous speed changes (mm/min)
+M203 X18000 Y18000 Z900 E7200                    ; set maximum speeds (mm/min)
+M201 X4000 Y3500.00 Z150 E3000                   ; set accelerations (mm/s^2)
 
 ; Reduced accelerations
 M201.1 X500 Y500 Z80 E500                        ; Set reduced acceleration for special move types (mm/s²)
 
 ; Printing and travel accelerations
-M204 P3000 T5500                                 ; Set printing acceleration and travel accelerations (mm/s²)
+M204 P2000 T3000                                 ; Set printing acceleration and travel accelerations (mm/s²)
 
 
 ; Axis Limits
@@ -80,7 +80,7 @@ M574 Z0 P"nil"                                   ; No endstop
 
 ; Z-probe (Voron TAP)
 M558 K0 P8 C"^121.io2.in" H2 R0.2 F300:180 T18000 A3 S0.05 ; Set Z probe type to switch and the dive height + speeds
-G31 K0 P500 X0 Y0 Z-1.27                         ; Set Z probe trigger value, offset and trigger height (higher Z value = nozzle closer to bed)
+G31 K0 P500 X0 Y0 Z-1.37                         ; Set Z probe trigger value, offset and trigger height (higher Z value = nozzle closer to bed)
 
 ; Bed leveling
 M671 X150:-38:338 Y366.6:1.5:1.5 S10             ; Leadscrew locations (Rear, Right, Left)
