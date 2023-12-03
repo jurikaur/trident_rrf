@@ -27,11 +27,6 @@ M561                                                                           ;
 M290 R0 S0                                                                     ; Reset baby stepping
 M84 E0                                                                         ; Disable extruder stepper
 
-; Lower currents
-;M98 P"/sys/lib/current/xy_current_low.g"                                       ; Set low XY currents
-;M913 X30 Y30
-;M98 P"/sys/lib/current/z_current_low.g"                                        ; Set low Z currents
-
 ; Lower Z relative to current position if needed
 if !move.axes[2].homed                                                         ; If Z ain't homed
   G91                                                                          ; Relative positioning
@@ -99,10 +94,6 @@ G30 K0 Z-99999                                                                 ;
 M400                                                                           ; Wait for moves to finish
 
 set global.bed_trammed = true                                                  ; Set global state
-
-; Full currents
-;M98 P"/sys/lib/current/xy_current_high.g"                                      ; Set high XY currents
-;M98 P"/sys/lib/current/z_current_high.g"                                       ; Set high Z currents
 
 
 ; Uncomment the following lines to lower Z(bed) after probing

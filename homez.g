@@ -29,36 +29,18 @@ if !exists(param.Z)
   ; Lower Z if needed
   if !move.axes[2].homed                                                       ; If Z isn't homed
     ; Lower Z currents, speed & accel
-    if fileexists("/sys/lib/current/z_current_low.g")
-      M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    else
-      M913 Z60                                                                 ; Set Z motors to n% of their max current
-    if fileexists("/sys/lib/speed/speed_probing.g")
-      M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    else
-      M204 P500 T1500                                                          ; Set printing acceleration and travel accelerations (mm/s²)
+    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
     G91                                                                        ; Relative positioning
     G1 Z{var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
     G90                                                                        ; Absolute positioning
-    if fileexists("/sys/lib/current/z_current_high.g")
-      M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
-    else
-      M913 Z100                                                                ; Set Z motors to 100% of their max current
+    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
   elif move.axes[2].userPosition < {var.Clearance}                             ; If Z is homed but less than var.Clearance
     ; Lower Z currents, speed & accel
-    if fileexists("/sys/lib/current/z_current_low.g")
-      M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    else
-      M913 Z60                                                                 ; Set Z motors to n% of their max current
-    if fileexists("/sys/lib/speed/speed_probing.g")
-      M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    else
-      M204 P500 T1500                                                          ; Set printing acceleration and travel accelerations (mm/s²)
+    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
     G1 Z{var.Clearance} F9000                                                  ; Move to Z var.Clearance
-    if fileexists("/sys/lib/current/z_current_high.g")
-      M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
-    else
-      M913 Z100                                                                ; Set Z motors to 100% of their max current
+    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
  
 ; ====================---------------------------------------------------------
 ; Home Z axis

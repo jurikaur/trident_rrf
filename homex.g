@@ -43,36 +43,19 @@ if !exists(param.Z)
   ; Lower Z if needed
   if !move.axes[2].homed                                                       ; If Z isn't homed
     ; Lower Z currents, speed & accel
-    if fileexists("/sys/lib/current/z_current_low.g")
-      M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    else
-      M913 Z60                                                                 ; Set Z motors to n% of their max current
-    if fileexists("/sys/lib/speed/speed_probing.g")
-      M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    else
-      M204 P500 T1500                                                          ; Set printing acceleration and travel accelerations (mm/s²)
+    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
     G91                                                                        ; Relative positioning
     G1 Z{var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
     G90                                                                        ; Absolute positioning
-    if fileexists("/sys/lib/current/z_current_high.g")
-      M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
-    else
-      M913 Z100                                                                ; Set Z motors to 100% of their max current
+    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
+
   elif move.axes[2].userPosition < {var.Clearance}                             ; If Z is homed but less than var.Clearance
     ; Lower Z currents, speed & accel
-    if fileexists("/sys/lib/current/z_current_low.g")
-      M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    else
-      M913 Z60                                                                 ; Set Z motors to n% of their max current
-    if fileexists("/sys/lib/speed/speed_probing.g")
-      M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    else
-      M204 P500 T1500                                                          ; Set printing acceleration and travel accelerations (mm/s²)
+    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
     G1 Z{var.Clearance} F9000                                                  ; Move to Z var.Clearance
-    if fileexists("/sys/lib/current/z_current_high.g")
-      M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
-    else
-      M913 Z100                                                                ; Set Z motors to 100% of their max current
+    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
  
 ; ====================---------------------------------------------------------
 ; Home X axis
@@ -90,14 +73,8 @@ M569 P{var.Y} S1 D3 V10                                                        ;
 M574 X2 Y2 S4                                                                  ; Configure sensorless endstop for high end on X & Y
  
 ; Lower XY currents, speed & accel
-if fileexists("/sys/lib/current/xy_current_low.g")
-  M98 P"/sys/lib/current/xy_current_low.g" C{var.CR}                           ; Set low XY currents and pass param.C with the values set here
-else
-  M913 X{var.CR} Y{var.CR}                                                     ; Set X Y motors to var.CR% of their max current
-if fileexists("/sys/lib/speed/speed_probing.g")
-  M98 P"/sys/lib/speed/speed_probing.g"                                        ; Set low speed & accel
-else
-  M204 P500 T1500                                                              ; Set printing acceleration and travel accelerations (mm/s²)
+M98 P"/sys/lib/current/xy_current_low.g" C{var.CR}                           ; Set low XY currents and pass param.C with the values set here
+M98 P"/sys/lib/speed/speed_probing.g"                                        ; Set low speed & accel
 M400                                                                           ; Wait for current moves to finish
  
 ; Stall detection parameters
@@ -127,14 +104,8 @@ M569 P{var.Y} S1 D2                                                            ;
 ; ====================
  
 ; Restore XY currents, speed & accel
-if fileexists("/sys/lib/current/xy_current_high.g")
-  M98 P"/sys/lib/current/xy_current_high.g"                                    ; Set high XY currents
-else
-  M913 X100 Y100                                                               ; Set X Y motors to var.100% of their max current
-if fileexists("/sys/lib/speed/speed_printing.g")
-  M98 P"/sys/lib/speed/speed_printing.g"                                       ; Set high speed & accel
-else
-  M204 P1500 T3000                                                             ; Set printing acceleration and travel accelerations (mm/s²)
+M98 P"/sys/lib/current/xy_current_high.g"                                    ; Set high XY currents
+M98 P"/sys/lib/speed/speed_printing.g"                                       ; Set high speed & accel
 
 G91                                                                        ; Relative positioning
 G1 Z{-var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position

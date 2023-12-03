@@ -62,7 +62,7 @@ M201 X4000 Y3500.00 Z150 E3000                   ; set accelerations (mm/s^2)
 M201.1 X500 Y500 Z80 E500                        ; Set reduced acceleration for special move types (mm/s²)
 
 ; Printing and travel accelerations
-M204 P3000 T3500                                 ; Set printing acceleration and travel accelerations (mm/s²)
+M204 P2000 T7000                                 ; Set printing acceleration and travel accelerations (mm/s²)
 
 
 ; Axis Limits
