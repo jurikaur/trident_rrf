@@ -80,7 +80,7 @@ M574 Z0 P"nil"                                   ; No endstop
 
 ; Z-probe (Voron TAP)
 M558 K0 P8 C"^121.io2.in" H2 R0.2 F300:180 T18000 A3 S0.05 ; Set Z probe type to switch and the dive height + speeds
-G31 K0 P500 X0 Y0 Z-1.37                         ; Set Z probe trigger value, offset and trigger height (higher Z value = nozzle closer to bed)
+G31 K0 P500 X0 Y0 Z-1.35                         ; Set Z probe trigger value, offset and trigger height (higher Z value = nozzle closer to bed)
 
 ; Bed leveling
 M671 X150:-38:338 Y366.6:1.5:1.5 S10             ; Leadscrew locations (Rear, Right, Left)

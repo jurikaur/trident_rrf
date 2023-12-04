@@ -11,7 +11,7 @@ var FilamentType        = "PLA"       ; Input the filament type (only for the me
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-var PA                  = 0.0525       ; Pressure advance amount (s)
+var PA                  = 0.0425       ; Pressure advance amount (s)
 var RLen                = 0.750        ; Retraction length (mm)
 var X_URLen             = 0.010        ; Extra unretract length (mm)
 var RSpd                = 4200         ; Retraction speed (mm/min)

@@ -1,5 +1,6 @@
-job-history.csv
-heightmap.csv
-accelerometer/
+sys/job-history.csv
+sys/filaments.csv
+sys/heightmap.csv
+sys/accelerometer/
 firmware/
 scripts/

@@ -16,7 +16,7 @@ G1 Z1.00 X20.0 Y20.0 F20000                                                    ;
 G1 Z10.00 F20000                                                               ; Move Z-Axis 10mm away from part
 G90                                                                            ; Absolute positioning
 G1 X150 Y290 F9000                                                             ; Move gantry close to home
-G1 E2 F800                                                                     ; Extrude slightly to help form a nice tip
+M98 P"/sys/lib/print/tip_shaping.g"                                            ; Extrude slightly to help form a nice tip
 G1 E{-(global.unload_length)} F800                                             ; Retract filament from meltzone
 M400                                                                           ; Wait for moves to finish
 M140 S0                                                                        ; Turn off heated bed

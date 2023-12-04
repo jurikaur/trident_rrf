@@ -36,7 +36,7 @@ M701 S{var.filament}                                                           ;
 M703                                                                           ; Filament config
 M106 P3 C"EXHAUSTF" S0 B0.1 H2 T{var.chamber_temp}                             ; Set Chamber temp to exhaust fan
 ;G0 Z{(global.first_layer_height + 5)} F3000                                    ; Drop bed to first layer height + 5mm to reduce pucker factor
-G31 K0 P500 X0 Y0 Z-0.95
+G31 K0 P500 X0 Y0 Z-1.32                                                       ; set z-offset
 M116 H1                                                                        ; Wait hotend to reach it's temperature
 M98 P"/sys/lib/print/print_purge.g"                                            ; Purge the nozzle before starting print
 M400                                                                           ; Wait for moves to finish
