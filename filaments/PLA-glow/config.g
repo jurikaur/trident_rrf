@@ -1,5 +1,5 @@
-; filaments/ABS/config.g  (v2.1)
-; Called when M703 is sent and ABS is loaded
+; filaments/PLA/config.g  (v2.1)
+; Called when M703 is sent and PLA is loaded
 
 ; ====================---------------------------------------------------------
 ; Settings section
@@ -7,12 +7,12 @@
 
 ; Filament settings
 
-var FilamentType        = "ABS"       ; Input the filament type (only for the message)
+var FilamentType        = "PLA-glow"       ; Input the filament type (only for the message)
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-var PA                  = 0.0475        ; Pressure advance amount (s)
-var RLen                = 0.40        ; Retraction length (mm)
+var PA                  = 0.0425       ; Pressure advance amount (s)
+var RLen                = 0.500        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
 var RSpd                = 4200         ; Retraction speed (mm/min)
 var URSpd               = 4200         ; Unretract speed (mm/min)

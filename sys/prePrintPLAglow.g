@@ -7,11 +7,10 @@
 
 var bed_temp = param.B
 var hotend_temp = param.E
-var filament = "PLA"
+var filament = "PLA-glow"
 var chamber_temp = param.C
 var soak_time = param.S
 var first_layer_height = 0.25
-
 
 M42 P0 S1                                                                      ; turn chamber lights 100%
 G21                                                                            ; Set units to millimeters
@@ -33,7 +32,7 @@ M701 S{var.filament}                                                           ;
 M703                                                                           ; Filament config
 M106 P3 C"EXHAUSTF" S0 B0.1 H2 T{var.chamber_temp}                             ; Set Chamber temp to exhaust fan
 G0 Z{(var.first_layer_height + 5)} F3000                                       ; Drop bed to first layer height + 5mm to reduce pucker factor
-G31 K0 P500 X0 Y0 Z-1.00                                                       ; set z-offset
+G31 K0 P500 X0 Y0 Z-1.0                                                        ; set z-offset
 M116 H1 S0                                                                     ; Wait hotend to reach it's temperature
 M98 P"/sys/lib/print/print_purge.g"                                            ; Purge the nozzle before starting print
 M400                                                                           ; Wait for moves to finish

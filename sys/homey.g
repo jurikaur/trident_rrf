@@ -2,12 +2,6 @@
 ; called to home the Y axis
 ; Configured for sensorless homing / stall detection on a Duet 3 Mini 5+ and LDO-42STH48-2504AC steppers on XY
  
-;---/
-; -/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--
-; THIS MACRO ONLY WORKS WITH RRF 3.5.0b1 AND LATER!!
-;--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--
-;-/
- 
 ; ====================---------------------------------------------------------
 ; Settings section
 ; ====================
@@ -38,23 +32,21 @@ if exists(global.Nozzle_CL)
 ; Lower Z axis
 ; ====================
  
-; If Z isn't allready been lowered
-if !exists(param.Z)
-  ; Lower Z if needed
-  if !move.axes[2].homed                                                       ; If Z isn't homed
-    ; Lower Z currents, speed & accel
-    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    G91                                                                        ; Relative positioning
-    G1 Z{var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
-    G90                                                                        ; Absolute positioning
-    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
-  elif move.axes[2].userPosition < {var.Clearance}                             ; If Z is homed but less than var.Clearance
-    ; Lower Z currents, speed & accel
-    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    G1 Z{var.Clearance} F9000                                                  ; Move to Z var.Clearance
-    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
+; Lower Z if needed
+if !move.axes[2].homed                                                       ; If Z isn't homed
+  ; Lower Z currents, speed & accel
+  M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+  M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
+  G91                                                                        ; Relative positioning
+  G1 Z{var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
+  G90                                                                        ; Absolute positioning
+  M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
+elif move.axes[2].userPosition < {var.Clearance}                             ; If Z is homed but less than var.Clearance
+  ; Lower Z currents, speed & accel
+  M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+  M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
+  G1 Z{var.Clearance} F9000                                                  ; Move to Z var.Clearance
+  M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
  
 ; ====================---------------------------------------------------------
 ; Home Y axis
@@ -105,7 +97,3 @@ M569 P{var.Y} S1 D2                                                            ;
 ; Restore XY currents, speed & accel
 M98 P"/sys/lib/current/xy_current_high.g"                                    ; Set high XY currents
 M98 P"/sys/lib/speed/speed_printing.g"                                       ; Set high speed & accel
- 
-G91                                                                        ; Relative positioning
-G1 Z{-var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
-G90                                                                        ; Absolute positioning

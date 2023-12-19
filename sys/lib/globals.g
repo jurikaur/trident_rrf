@@ -59,17 +59,17 @@ if !exists(global.RunDaemon)
 ;if !exists(global.filament_type)
 ;  global filament_type = "none"
 
-if !exists(global.input_shaper)
-  global input_shaper = (move.shaping.type)
+;if !exists(global.input_shaper)
+;  global input_shaper = (move.shaping.type)
 
-if !exists(global.def_print_accel)
-  global def_print_accel = (move.printingAcceleration)
+;if !exists(global.def_print_accel)
+;  global def_print_accel = (move.printingAcceleration)
 
-if !exists(global.low_accel)
-  global low_accel = 1000
+;if !exists(global.low_accel)
+;  global low_accel = 1000
 
-if !exists(global.accel_control)
-  global accel_control = true
+;if !exists(global.accel_control)
+;  global accel_control = true
 
 if !exists(global.initial_extruder)
   global initial_extruder = 0

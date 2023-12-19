@@ -1,12 +1,6 @@
 ; /sys/homez.g  v2.5
 ; Called to home the Z axis with probe K0
  
-;---/
-; -/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--
-; THIS MACRO ONLY WORKS WITH RRF 3.5.0b1 AND LATER!!
-;--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--
-;-/
- 
 ; ====================---------------------------------------------------------
 ; Settings section
 ; ====================
@@ -24,23 +18,21 @@ if exists(global.Nozzle_CL)
 ; Lower Z axis
 ; ====================
  
-; If Z isn't allready been lowered
-if !exists(param.Z)
-  ; Lower Z if needed
-  if !move.axes[2].homed                                                       ; If Z isn't homed
-    ; Lower Z currents, speed & accel
-    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    G91                                                                        ; Relative positioning
-    G1 Z{var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
-    G90                                                                        ; Absolute positioning
-    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
-  elif move.axes[2].userPosition < {var.Clearance}                             ; If Z is homed but less than var.Clearance
-    ; Lower Z currents, speed & accel
-    M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
-    M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
-    G1 Z{var.Clearance} F9000                                                  ; Move to Z var.Clearance
-    M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
+; Lower Z if needed
+if !move.axes[2].homed                                                       ; If Z isn't homed
+  ; Lower Z currents, speed & accel
+  M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+  M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
+  G91                                                                        ; Relative positioning
+  G1 Z{var.Clearance} F9000 H1                                               ; Lower Z(bed) relative to current position
+  G90                                                                        ; Absolute positioning
+  M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
+elif move.axes[2].userPosition < {var.Clearance}                             ; If Z is homed but less than var.Clearance
+  ; Lower Z currents, speed & accel
+  M98 P"/sys/lib/current/z_current_low.g"                                  ; Set low Z currents
+  M98 P"/sys/lib/speed/speed_probing.g"                                    ; set low speed & accel
+  G1 Z{var.Clearance} F9000                                                  ; Move to Z var.Clearance
+  M98 P"/sys/lib/current/z_current_high.g"                                 ; Restore normal Z currents
  
 ; ====================---------------------------------------------------------
 ; Home Z axis
@@ -68,7 +60,4 @@ if !exists(param.Z)
 G90                                                                            ; Absolute positioning
 G1 Z{var.Clearance} F2400                                                      ; Move to Z var.Clearance
  
-; If using Voron TAP, report that probing is completed
-if exists(global.TAPPING)
-  set global.TAPPING = false
-  M402 P0                                                                      ; Return the hotend to the temperature it had before probing
+M402 P0                                                                      ; Return the hotend to the temperature it had before probing
