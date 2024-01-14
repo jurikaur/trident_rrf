@@ -23,8 +23,8 @@ M116 H0 S1                                                                     ;
 G10 P0 R150 S150                                                               ; Set active and standby temps for the initial tool for probing
 G28                                                                            ; home all axes
 G32                                                                            ; bed tramming
-G29 S1 P"/sys/heightmap.csv"                                                   ; Load height map file "full_heightmap.csv" and enable mesh bed compensation
-M376 H5                                                                        ; Set bed compensation taper to 5mm
+;G29 S1 P"/sys/heightmap.csv"                                                   ; Load height map file "full_heightmap.csv" and enable mesh bed compensation
+;M376 H5                                                                        ; Set bed compensation taper to 5mm
 G10 P0 R{var.hotend_temp} S{var.hotend_temp}                                   ; Set active and standby temps for the initial tool
 M42 P0 S0.3                                                                    ; Turn on chamber lights to 30%
 T0                                                                             ; Select initial tool
