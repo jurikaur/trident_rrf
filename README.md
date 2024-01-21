@@ -26,12 +26,4 @@
 - [Pins mod](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_Trident_Pins_Mod)
 - [BFI idlers](https://github.com/clee/VoronBFI/tree/main)
 
-;          --- Drive map ---
-; (While looking at the printer top down)
-
-;             0.0-----0.1
-;              |  0.2  |
-;              |-------|
-;              |0.3|0.4|
-;               ---+---
-;                Front
+/images/Drive_maping.PNG
