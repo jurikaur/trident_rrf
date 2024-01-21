@@ -26,4 +26,4 @@
 - [Pins mod](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_Trident_Pins_Mod)
 - [BFI idlers](https://github.com/clee/VoronBFI/tree/main)
 
-(/images/Drive_maping.PNG)
+!(/images/Drive_maping.PNG)
