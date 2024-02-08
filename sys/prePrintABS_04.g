@@ -23,12 +23,18 @@ M116 H0 S1                                                                     ;
 M98 P"/sys/lib/print/heatsoak.g" T40                                           ; Heating chamber to 40C                                                                    
 G10 P0 R150 S150                                                               ; Set active and standby temps for the initial tool for probing
 G28                                                                            ; home all axes
+<<<<<<< HEAD
 M401                                                                           ; attach klicky probe
 G32                                                                            ; bed tramming
 ;G29 S2                                                                         ; disable bedmesh to allow IS to work
 ;G29 S1 P"/sys/heightmap.csv"                                                   ; Load height map file "full_heightmap.csv" and enable mesh bed compensation
 ;M376 H5                                                                        ; Set bed compensation taper to 5mm
 ;M593 P"zvdd" F38.3 S0.00 L0.25                                                 ; Enable IS
+=======
+G32                                                                            ; bed tramming
+G29 S1 P"/sys/heightmap.csv"                                                   ; Load height map file "full_heightmap.csv" and enable mesh bed compensation
+M376 H5                                                                        ; Set bed compensation taper to 5mm
+>>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735
 G10 P0 R{var.hotend_temp} S{var.hotend_temp}                                   ; Set active and standby temps for the initial tool
 M42 P0 S0.3                                                                    ; Turn on chamber lights to 30%
 T0                                                                             ; Select initial tool
@@ -36,6 +42,10 @@ M701 S{var.filament}                                                           ;
 M703                                                                           ; Filament config
 M106 P3 C"EXHAUSTF" S0 B0.1 H2 T{var.chamber_temp}                             ; Set Chamber temp to exhaust fan
 G0 Z{(var.first_layer_height + 5)} F3000                                       ; Drop bed to first layer height + 5mm to reduce pucker factor
+<<<<<<< HEAD
+=======
+G31 K0 P500 X0 Y0 Z-1.00                                                       ; set z-offset (retune z-offset by filament) - mida lähemale nullile on arv seda lähemal on printbed nozzelile
+>>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735
 M116 H1                                                                        ; Wait hotend to reach it's temperature
 M98 P"/sys/lib/print/print_purge.g"                                            ; Purge the nozzle before starting print
 M400                                                                           ; Wait for moves to finish
