@@ -11,7 +11,13 @@ var FilamentType        = "ABS"       ; Input the filament type (only for the me
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
+<<<<<<< HEAD
+;var PA                  = 0.045        ; Pressure advance amount (s) 0.4 brass nozzle
+;var PA                  = 0.055         ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
+var PA                  = 0.07        ; PA Undertaker .4 + ProtoXtruder(HGX)
+=======
 var PA                  = 0.0475        ; Pressure advance amount (s)
+>>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735
 var RLen                = 0.40        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
 var RSpd                = 4200         ; Retraction speed (mm/min)
