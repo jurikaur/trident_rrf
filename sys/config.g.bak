@@ -54,14 +54,8 @@ M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
 M201 E2000 ; set accelerations (mm/s^2)
 
-<<<<<<< HEAD
 ; Kinematics
 M669 K1 ; configure CoreXY kinematics
-=======
-; Drive currents
-M906 X1700 Y1700 Z800 E840 I30                   ; set motor currents (mA) and motor idle factor in per cent
-M84 X Y Z E0 S30                                 ; Set idle timeout
->>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735
 
 ; Probes
 M558 K0 P8 C"121.io2.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
@@ -72,24 +66,10 @@ M574 X2 P"121.io1.in" S1 ; configure X axis endstop
 M574 Y2 P"io6.in" S1 ; configure Y axis endstop
 M574 Z0 ; configure Z axis endstop
 
-<<<<<<< HEAD
 ; Sensors
 M308 S0 P"temp0" Y"thermistor" A"Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
 M308 S1 P"121.temp0" Y"pt1000" A"Hotend" ; configure sensor #1
 M308 S2 P"temp1" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
-=======
-; Z-probe (Voron TAP)
-M558 K0 P8 C"^121.io2.in" H2 R0.2 F300:180 T18000 A3 S0.05 ; Set Z probe type to switch and the dive height + speeds
-G31 K0 P500 X0 Y0 Z-1.0                          ; Set Z probe trigger value, offset and trigger height (higher Z value = nozzle closer to bed)
-
-; Bed leveling
-M671 X150:-38:338 Y366.6:1.5:1.5 S10             ; Leadscrew locations (Rear, Right, Left)
-M557 X25:275 Y25:275 S20                         ; define grid for mesh bed compensation
-
-; Accelerometer
-M955 P121.0 I10                                  ; Configure accelerometer
-ˇ;M593 P"zvdd" F41                               ; disabled 3.5.0rc1 has layer shift issues when IS enabled
->>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735
 
 ; Heaters
 M950 H0 C"out0" T0 ; create heater #0
