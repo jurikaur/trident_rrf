@@ -25,3 +25,8 @@
 - [Bump dock for klicky](https://github.com/DW-Tas/Klicky-00/blob/main/instructions.md#bump-dock)
 - [Pins mod](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_Trident_Pins_Mod)
 - [BFI idlers](https://github.com/clee/VoronBFI/tree/main)
+<<<<<<< HEAD
+
+![Drive map](/images/Drive_maping.PNG)
+=======
+>>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735

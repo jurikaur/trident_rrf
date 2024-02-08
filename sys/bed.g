@@ -1,3 +1,37 @@
+<<<<<<< HEAD
+M561
+M558 K0 H8 F500 ;1000
+G90
+G1 Z12 ;F2000
+M401
+
+G30 K0 P0 X15 Y30 Z-99999
+G30 K0 P1 X150 Y285 Z-99999
+G30 K0 P2 X285 Y30 Z-99999 S3
+echo "Current rough pass deviation: " ^ move.calibration.initial.deviation
+
+M558 K0 H4 F300 ;500
+
+G30 K0 P0 X15 Y30 Z-99999
+G30 K0 P1 X150 Y285 Z-99999
+G30 K0 P2 X285 Y30 Z-99999 S3
+echo "Current medium pass deviation: " ^ move.calibration.initial.deviation
+
+M558 K0 H2 F120
+while move.calibration.initial.deviation > 0.005
+  if iterations >= 5
+    echo "Error: Max attemps failed. Deviation: " ^ move.calibration.initial.deviation
+    break
+  echo "Deviation over threshold. Executing pass" , iterations+3, "deviation", move.calibration.initial.deviation
+  G30 K0 P0 X15 Y30 Z-99999
+  G30 K0 P1 X150 Y285 Z-99999
+  G30 K0 P2 X285 Y30 Z-99999 S3
+  echo "Current deviation: " ^ move.calibration.initial.deviation
+  continue
+echo "Final deviation: " ^ move.calibration.initial.deviation
+M558 K0 F600:180
+G28 Z
+=======
 ; bed.g
 ; called to perform automatic bed compensation via G32
 ;
@@ -56,3 +90,4 @@ M400                                                                           ;
 ; Uncomment the following lines to lower Z(bed) after probing
 G90                                                                            ; Absolute positioning
 G1 Z5 F2400                                                                    ; Move to Z 10
+>>>>>>> 8fd77e3018ad59a09184f993677f09c623c95735
