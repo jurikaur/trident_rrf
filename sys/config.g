@@ -36,9 +36,9 @@ M84 S30 ; set motor current idle timeout
 
 ; Axes
 M584 X0.0 Y0.1 Z0.3:0.2:0.4 ; set axis mapping
-M350 X8 Y8 Z8 I1 ; configure microstepping with interpolation
+M350 X16 Y16 Z8 I1 ; configure microstepping with interpolation
 M906 X1700 Y1700 Z1000 ; set axis driver currents
-M92 X80 Y80 Z400 ; configure steps per mm
+M92 X160 Y160 Z400 ; configure steps per mm
 M208 X0:300 Y0:305 Z0:240 ; set minimum and maximum axis limits
 M566 X540 Y540 Z12 ; set maximum instantaneous speed changes (mm/min)
 M203 X18000 Y18000 Z900 ; set maximum speeds (mm/min)
@@ -48,7 +48,8 @@ M201 X8000 Y8000 Z350 ; set accelerations (mm/s^2)
 M584 E121.0 ; set extruder mapping
 M350 E16 I1 ; configure microstepping with interpolation
 M906 E700 ; set extruder driver currents
-M92 E617.6470588 ; configure steps per mm
+M92 E571.8954248 ; ProtoXtruder HGX gears
+;M92 E617.6470588 ; configure steps per mm galileo2
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
 M201 E2000 ; set accelerations (mm/s^2)
