@@ -1,11 +1,11 @@
-; config-override.g file generated in response to M500 at 2024-02-09 14:29
+; config-override.g file generated in response to M500 at 2024-02-10 09:09
 ; This is a system-generated file - do not edit
 ; Heater model parameters
 M307 H0 R0.386 K0.328:0.000 D7.19 E1.35 S1.00 B0
 M307 H1 R2.579 K0.351:0.112 D6.17 E1.35 S1.00 B0 V24.2
 M307 H2 R0.030 K0.050:0.000 D10.00 E1.35 S1.00 B1
 ; Z probe parameters
-G31 K0 P500 X0.0 Y28.0 Z5.13
+G31 K0 P500 X0.0 Y28.0 Z5.17
 ; Probed tool offsets
 G10 P0 X0.000 Y0.000 Z0.000
 ; Workplace coordinates

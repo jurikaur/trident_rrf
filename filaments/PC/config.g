@@ -16,8 +16,8 @@ var Default             = false        ; Use default settings (retraction and PA
 var PA                  = 0.0725        ; PA Undertaker .4 + ProtoXtruder(HGX)
 var RLen                = 0.40        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
-var RSpd                = 4200         ; Retraction speed (mm/min)
-var URSpd               = 4200         ; Unretract speed (mm/min)
+var RSpd                = 2100         ; Retraction speed (mm/min)
+var URSpd               = 1800         ; Unretract speed (mm/min)
 var Z_Lift              = 0.400        ; Zlift amount (mm)
 
 ; Message placeholders
@@ -34,12 +34,6 @@ if !var.Default
 
   ;Retraction & Zlift
   M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
-
-  ; Travel & acceleration
-  ;M204 P800 T3000                                                             ; Set printing and travel accelerations (mm/s²) 
-
-  ;Cancel Ringing (Ghosting)
-  ;M593 P"none" F50                                                            ; Cancel ringing at 50Hz
 
 ; ====================---------------------------------------------------------
 ; Define & send messages
