@@ -1,0 +1,17 @@
+//Config for Fly-Super8Pro H723
+board = fly_super8_pro_h723
+//WiFi pins
+8266wifi.espDataReadyPin = PD_13
+8266wifi.TfrReadyPin = PD_11
+8266wifi.espResetPin = PD_10
+
+
+//ESP32 RX/TX Settings
+8266wifi.serialRxTxPins = { PD_9, PD_8 }
+serial.aux.rxTxPins = { PA_10, PA_9 }
+heat.tempSensePins = { adc0, adc1, adc2, adc3, adc4, adc5 }
+
+//stepper drivers
+stepper.numSmartDrivers = 5
+stepper.DriverType = {tmc2240, tmc2240, tmc2240, tmc2240, tmc2240}
+stepper.spiChannel = 2

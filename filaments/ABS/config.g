@@ -35,6 +35,10 @@ if !var.Default
   ;Retraction & Zlift
   M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
 
+; ====================---------------------------------------------------------
+; Define & send messages
+; ====================
+
 if var.Default
   set var.Message1 = "" ^ var.FilamentType ^ " config applied (default settings)"
 else
