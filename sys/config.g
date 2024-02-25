@@ -121,7 +121,7 @@ M308 S12 Y"mcu-temp" P"121.dummy" A"1LC MCU"
 M950 P0 C"out1"                                  ; Create output Port0 attached to out1 connector for LED lights
 
 ;Input Shaper
-M593 P"mzv" F25 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
+M593 P"mzv" F37 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
 
 ; Bed leveling
 M671 X-50:150:350 Y18:348:18 S5                  ; front left, back, front right
