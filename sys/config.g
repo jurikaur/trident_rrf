@@ -6,9 +6,6 @@
 ; General
 M550 P"VT1011" ; set hostname
 
-; Accessories
-M575 P1 S0 B57600 ; configure PanelDue support
-
 ; Network
 M552 S1 ; configure Ethernet adapter
 M586 P0 S1 ; configure HTTP
@@ -23,10 +20,10 @@ M955 P124.0 I12 ; configure accelerometer on board #124
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
 M569 P0.1 S1 D2 ; driver 0.1 goes forwards (Y axis)
-M569 P0.2 S0 D3 V2000 ; driver 0.2 goes backwards (Z axis)
-M569 P0.3 S0 D3 V2000 ; driver 0.3 goes backwards (Z axis)
-M569 P0.4 S0 D3 V2000 ; driver 0.4 goes backwards (Z axis)
-M569 P124.0 S0 D2 ; driver 121.0 goes backwards (extruder 0)
+M569 P0.3 S0 D3 V2000 ; driver 0.2 goes backwards (Z axis)
+M569 P0.4 S0 D3 V2000 ; driver 0.3 goes backwards (Z axis)
+M569 P0.5 S0 D3 V2000 ; driver 0.4 goes backwards (Z axis)
+M569 P124.0 S1 D2 ; driver 121.0 goes forwards (extruder 0)
 ;M569 P5 S0 D2
 
 ; Motor Idle Current Reduction
@@ -34,25 +31,26 @@ M906 I30 ; set motor current idle factor
 M84 S30 ; set motor current idle timeout
 
 ; Axes
-M584 X0 Y0 Z3:2:4 ; set axis mapping
-M350 X16 Y16 Z8 I1 ; configure microstepping with interpolation
+M584 X0.0 Y0.1 Z0.3:0.4:0.5 ; set axis mapping
+M350 X32 Y32 Z8 I1 ; configure microstepping with interpolation
 M906 X1700 Y1700 Z1000 ; set axis driver currents
 M92 X160 Y160 Z400 ; configure steps per mm
-M208 X0:300 Y0:305 Z0:240 ; set minimum and maximum axis limits
-M566 X540 Y540 Z12 ; set maximum instantaneous speed changes (mm/min)
-M203 X18000 Y18000 Z900 ; set maximum speeds (mm/min)
-M201 X8000 Y8000 Z350 ; set accelerations (mm/s^2)
+M208 X0:300 Y0:308 Z0:240 ; set minimum and maximum axis limits
+M566 X600 Y600 Z12 ; set maximum instantaneous speed changes (mm/min)
+M203 X18000 Y18000 Z720 ; set maximum speeds (mm/min)
+M201 X5000 Y4000 Z250 ; set accelerations (mm/s^2)
 
 ; Extruders
 M584 E124.0 ; set extruder mapping
 ;M584 E5 ; ajutine
 M350 E16 I1 ; configure microstepping with interpolation
-M906 E700 ; set extruder driver currents
-M92 E571.8954248 ; ProtoXtruder HGX gears
-;M92 E617.6470588 ; configure steps per mm galileo2
-M566 E300 ; set maximum instantaneous speed changes (mm/min)
-M203 E7200 ; set maximum speeds (mm/min)
-M201 E2000 ; set accelerations (mm/s^2)
+M906 E1100 ; set extruder driver currents wantai 1,88A motor
+;M92 E536.057598004908 ; Papilio Lite R3 extruder
+;M92 E571.8954248 ; ProtoXtruder HGX gears
+M92 E607 ; configure steps per mm galileo2
+M566 E500 ; set maximum instantaneous speed changes (mm/min)
+M203 E9600 ; set maximum speeds (mm/min)
+M201 E3500 ; set accelerations (mm/s^2)
 
 ; Kinematics
 M669 K1 ; configure CoreXY kinematics
@@ -63,16 +61,14 @@ M558 K0 P8 C"124.io2.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered dig
 G31 P500 X0 Y28 Z4.8 ; set Z probe trigger value, offset and trigger height
 
 ; Endstops
-M574 X2 P"124.io1.in" S1 ; configure X axis endstop
-;M574 X2 P"io1" S1
-M574 Y2 P"io0" S1 ; configure Y axis endstop
+M574 X2 P"124.io0.in" S1 ; configure X axis endstop
+M574 Y2 P"io2" S1 ; configure Y axis endstop
 M574 Z0 ; configure Z axis endstop
 
 ; Sensors
-M308 S0 P"adc5" Y"thermistor" A"Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
-M308 S1 P"124.temp0" Y"pt1000" A"Hotend" ; configure sensor #1
-;M308 S1 P"adc1" Y"pt1000" A"Hotend"
-M308 S2 P"adc2" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
+M308 S0 P"out5" Y"thermistor" A"Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
+M308 S1 P"124.temp0" Y"pt1000" R1000 A"Hotend" ; configure sensor #1
+M308 S2 P"ADC_2" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
 
 ; Heaters
 M950 H0 C"heat0" T0 ; create heater #0
@@ -80,7 +76,6 @@ M143 H0 P0 T0 C0 S120 A0 ; configure heater monitor #0 for heater #0
 M143 H0 P1 T0 C0 S120 A2 ; configure heater monitor #1 for heater #0
 M143 H0 P2 T0 C0 S125 A1 ; configure heater monitor #2 for heater #0
 M950 H1 C"124.out0" T1 ; create heater #1
-;M950 H1 C"heat1" T1; ajutine
 M143 H1 P0 T1 C0 S350 A0 ; configure heater monitor #0 for heater #1
 M950 H2 C"heat4" T2 ; create heater #2
 M143 H2 P0 T2 C0 S65 A0 ; configure heater monitor #0 for heater #2
@@ -95,23 +90,26 @@ M141 P0 H2 ; configure heated chamber #0
 
 ; Fans
 M950 F0 C"124.out1" ; create fan #0
-;M950 F0 C"fan0"
 M106 P0 C"Part Cooling" S0 L0 X1 B0.1 ; configure fan #0
 M950 F1 C"124.out2" ; create fan #1
-;M950 F1 C"fan1"
 M106 P1 C"Hotend Fan" S0 B0.1 H1 T45 ; configure fan #1
 M950 F2 C"fan2" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
 M950 F3 C"fan3" ; create fan #3
 M106 P3 C"EXHAUSTF" S0 B0.1 H2 T45 ; configure fan #3
-M950 F4 C"fan4" ; create fan #4
-M106 P4 C"FILTER" S0 B0.1 H0 T90 ; configure fan #4
-M950 F5 C"fan5" ; create fan #5
-M106 P5 C"Electronics Fan" S0 L0 X0.6 B0.1
+;M950 F4 C"fan4" ; create fan #4
+;M106 P4 C"FILTER" S0 B0.1 H0 T90 ; configure fan #4
+;M950 F5 C"heat1" ; create fan #5
+;M106 P5 C"Electronics Fan" H3 T40 ;S0 L0 X0.6 B0.1
+M950 F6 C"fan4" ; create Fan #6 - stepper cooling fan
+M106 P6 C"Stepper Fan" H7 T70 ; set to monitor highest stepper temp
 
 ; Tools
 M563 P0 S"Mosquito Magnum" D0 H1 F0 ; create tool #0
 M568 P0 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
+
+; Accessories
+M575 P1 S1 B57600 ; configure PanelDue support
 
 ; Miscellaneous
 M501 ; load saved parameters from non-volatile memory
@@ -119,17 +117,22 @@ T0 ; select first tool
 
 ; Custom settings
 ; Duet5+ mcu temp
-M308 S3 Y"mcu-temp" A"MCU"                       ; Configure sensor 2 as MCU temperature
+M308 S3 Y"mcu-temp" A"MCU"                       ; Configure sensor 3 as MCU temperature
 M912 P0 S-2.9                                    ; MCU temp calibration parameters
 
 ; toolhead temp
 M308 S12 Y"mcu-temp" P"124.dummy" A"RRF36 MCU"
 
+; highest tmc driver temp
+M308 S7 Y"drivers" A"max tmc temp"
+M308 S8 Y"drivertemp" p"S7.0" A"Motor 0"
+M308 S9 Y"drivertemp" p"S7.1" A"Motor 1"
+
 ;Chamber LED
 M950 P0 C"heat3"                                  ; Create output Port0 attached to out1 connector for LED lights
 
 ;Input Shaper
-M593 P"mzv" F25 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
+M593 P"mzv" F33 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
 
 ; Bed leveling
 M671 X-50:150:350 Y18:348:18 S5                  ; front left, back, front right

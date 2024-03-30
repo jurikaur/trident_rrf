@@ -1,6 +1,6 @@
 M400
 G91 ; relative positioning
-G1 Z5 F2400 ; move nozzle relative to position
+G1 Z15 F2400 ; move nozzle relative to position
 G90 ; absolute positioning
 
 M106 P0 S0 ; layer fan off
@@ -14,7 +14,7 @@ M98 P"/sys/lib/purge-bucket.g" ; move to purge bucket position
 
 G1 E2 F3600 ; unretract previous amount before ramming
 G1 E1 F400  ; unretract 1mm
-G1 E-15 F3600 ; retract 15mm to clear meltzone
+G1 E-5 F3600 ; retract 15mm to clear meltzone
 M400 ; wait for moves to finish
 
 G10 P0 S-273.1 R-273.1 ; turn off T0 toolhead
