@@ -1,12 +1,14 @@
 M98 R1
 
 M42 P0 S0.6 ; turn chamber LED to 60%
+set global.ventilateChamber = 0 ; disable chamber ventilation
 
 G21 ;metric values
 G90 ;absolute positioning
 M83 ;relative extrusion
 M107 ;start with the fan off
 G92 E0 ;zero the extruded length
+M150 E1 R255 P192 S1 F0
 
 M140 S{param.H} ; start preheating the bed
 
@@ -20,8 +22,10 @@ if {param.H} > 90
     M106 P2 S0.60 ; turn on bed fans to heat chamber
     M116 H2 ; wait chamber to reach min requested temp
   M106 P2 S0.60 ; set bed fans to 50% to heat chamber
-  M106 P3 C"EXHAUSTF" S0 B0.1 H2 T60 ; set exhaust fan to trigger on max chamber temp
+  ;M106 P3 C"EXHAUSTF" S0 B0.1 H2 T60 ; set exhaust fan to trigger on max chamber temp
 
+
+M150 E1 U255 B255 P192 S1 F0
 
 ; home printer
 var need_g32 = false
@@ -38,9 +42,15 @@ else
 
 ; Z-Tilt bed
 if var.need_g32
+  M402 ; detach block
+  M98 P"lib/brush-nozzle.g"
+  M401 ; attach block
+
   G32
   if result != 0
     abort "Z-Tilt failed"
+
+G10 P0 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
 
 ; bedmesh
 if var.need_g32
@@ -52,6 +62,8 @@ if result != 0
 
 M116 P0
 
+M98 P"lib/clean-nozzle.g"
+
 ; intro line
 G1 X297 Y150 Z1 F12000
 G1      Y50 Z{param.L} E30 F500 ;intro line
@@ -59,6 +71,6 @@ G92 E0 ;zero the extruded length again
 
 M141 S-273.1 ; turn off fake chamber heater
 
-G10 P0 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
+M150 E1 W255 P192 S1 F0
 
 M42 P0 S0.4 ; turn chamber LED to 40%

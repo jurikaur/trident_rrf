@@ -34,5 +34,7 @@ while #job.file.filament > 0
   set var.extrusion = var.extrusion + job.file.filament[iterations]
 
 echo >>"job-history.csv" """" ^ job.lastFileName ^ """," ^ state.time ^ "," ^ job.lastDuration ^ ",1," ^ var.extrusion
+M150 E1 U255 P192 S1 F0
 
-echo "stop.g end"
+; start Chamber ventilate
+set global.ventilateChamber = 15 ; set exhaust timer to 15min
