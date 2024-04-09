@@ -10,4 +10,7 @@ G1 Z15 F5000			; raise nozzle 2mm
 G90					; absolute moves
 M98 P"/sys/lib/purge-bucket.g"
 ;G1 X0 Y85 F5000		; move head out of the way of the print
-M150 E1 R255 B255 P192 S1 F0
+
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "busy"

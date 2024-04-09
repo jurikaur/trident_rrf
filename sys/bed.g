@@ -1,3 +1,7 @@
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "leveling"
+
 M561
 M558 K0 H8 F500 ;1000
 G90
@@ -30,3 +34,7 @@ while move.calibration.initial.deviation > 0.005
 echo "Final deviation: " ^ move.calibration.initial.deviation
 M558 K0 F600:180
 G28 Z
+
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "ready"

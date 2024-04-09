@@ -8,7 +8,10 @@ G90 ;absolute positioning
 M83 ;relative extrusion
 M107 ;start with the fan off
 G92 E0 ;zero the extruded length
-M150 E1 R255 P192 S1 F0
+
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "heating"
 
 M140 S{param.H} ; start preheating the bed
 
@@ -25,7 +28,6 @@ if {param.H} > 90
   ;M106 P3 C"EXHAUSTF" S0 B0.1 H2 T60 ; set exhaust fan to trigger on max chamber temp
 
 
-M150 E1 U255 B255 P192 S1 F0
 
 ; home printer
 var need_g32 = false
@@ -71,6 +73,9 @@ G92 E0 ;zero the extruded length again
 
 M141 S-273.1 ; turn off fake chamber heater
 
-M150 E1 W255 P192 S1 F0
+
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "printing"
 
 M42 P0 S0.4 ; turn chamber LED to 40%

@@ -1,3 +1,7 @@
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "meshing"
+
 G90
 G1 Z10 F2400
 M401
@@ -10,3 +14,7 @@ G29 S0
 if result != 0
   abort "Mesh probing failed"
 M402
+
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "ready"
