@@ -14,3 +14,4 @@ M98 P"/sys/lib/purge-bucket.g"
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "busy"
+  M98 P"/sys/lib/sb_leds.g"

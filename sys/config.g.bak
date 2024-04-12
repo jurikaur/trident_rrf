@@ -129,8 +129,8 @@ M308 S9 Y"drivertemp" p"S7.1" A"Motor 1"
 M950 P0 C"heat2"                                  ; Create output Port0 attached to out1 connector for LED lights
 
 ;toolhead neopixel LEDs
-M950 E1 C"124.rgbled" T2 Q2000000
-M98 P"lib/toolhead-leds.g"
+M950 E0 C"124.rgbled" T2 Q2000000
+;M98 P"lib/toolhead-leds.g"
 
 ;Input Shaper
 M593 P"mzv" F33 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled

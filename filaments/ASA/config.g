@@ -16,9 +16,9 @@ var Default             = false        ; Use default settings (retraction and PA
 var PA                  = 0.055        ; PA Undertaker .4 + ProtoXtruder(HGX)
 var RLen                = 0.40        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
-var RSpd                = 3000         ; Retraction speed (mm/min)
-var URSpd               = 1800         ; Unretract speed (mm/min)
-var Z_Lift              = 0.400        ; Zlift amount (mm)
+var RSpd                = 3600         ; Retraction speed (mm/min)
+var URSpd               = 3600         ; Unretract speed (mm/min)
+var Z_Lift              = 0.200        ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"

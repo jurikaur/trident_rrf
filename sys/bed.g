@@ -1,6 +1,7 @@
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "leveling"
+  M98 P"/sys/lib/sb_leds.g"
 
 M561
 M558 K0 H8 F500 ;1000
@@ -38,3 +39,4 @@ G28 Z
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
+  M98 P"/sys/lib/sb_leds.g"

@@ -47,9 +47,9 @@ M906 E1100 ; set extruder driver currents wantai 1,88A motor
 ;M92 E536.057598004908 ; Papilio Lite R3 extruder
 ;M92 E571.8954248 ; ProtoXtruder HGX gears
 M92 E607 ; configure steps per mm galileo2
-M566 E500 ; set maximum instantaneous speed changes (mm/min)
-M203 E9600 ; set maximum speeds (mm/min)
-M201 E3500 ; set accelerations (mm/s^2)
+M566 E300 ; set maximum instantaneous speed changes (mm/min)
+M203 E7200 ; set maximum speeds (mm/min)
+M201 E4000 ; set accelerations (mm/s^2)
 
 ; Kinematics
 M669 K1 ; configure CoreXY kinematics

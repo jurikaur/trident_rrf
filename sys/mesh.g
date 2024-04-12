@@ -1,6 +1,7 @@
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "meshing"
+  M98 P"/sys/lib/sb_leds.g"
 
 G90
 G1 Z10 F2400
@@ -18,3 +19,4 @@ M402
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
+  M98 P"/sys/lib/sb_leds.g"
