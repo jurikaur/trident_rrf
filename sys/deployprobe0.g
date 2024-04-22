@@ -4,7 +4,7 @@ if sensors.probes[0].value[0] == 1000
   G1 X42 Y285 F3000
   G1 Y308
   G1 Y280
-  M400
+  M400 S1
   if sensors.probes[0].value[0] == 1000
     abort "Probe attach failed"
 G1 X150 Y150

@@ -14,4 +14,4 @@ echo >>"job-history.csv" global.cancel_statistics
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
-  M98 P"/sys/lib/sb_leds.g"
+  ;M98 P"/sys/lib/sb_leds.g"

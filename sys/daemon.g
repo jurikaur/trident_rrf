@@ -20,13 +20,13 @@ while global.RunDaemon
   ;    M98 P"/sys/lib/sb_leds.g"                                      ; Check if global.sb_leds has changed since last run/loop
 
   ;ventilate Chamber
-  ;if exists(global.ventilateChamber)
-  ;  if global.ventilateChamber <= 0
-  ;    M106 P3 S0 ; stop exhaust
+  if exists(global.ventilateChamber)
+    if global.ventilateChamber <= 0
+      M106 P3 S0 ; stop exhaust
     
-  ;  if global.ventilateChamber > 0
-  ;    M106 P3 S1
-  ;    set global.ventilateChamber = ((global.ventilateChamber*60000)-250)/60000
+    if global.ventilateChamber > 0
+      M106 P3 S1
+      set global.ventilateChamber = ((global.ventilateChamber*60000)-250)/60000
     
   ; ---------------------------------------------------------------------------
   ; Daemon loop delay

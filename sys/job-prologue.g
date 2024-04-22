@@ -3,6 +3,9 @@ M98 R1
 M42 P0 S0.6 ; turn chamber LED to 60%
 set global.ventilateChamber = 0 ; disable chamber ventilation
 
+; enable daemon
+set global.RunDaemon = true
+
 G21 ;metric values
 G90 ;absolute positioning
 M83 ;relative extrusion
@@ -79,3 +82,6 @@ if exists(global.sb_leds)
   set global.sb_leds = "printing"
 
 M42 P0 S0.4 ; turn chamber LED to 40%
+
+; disable daemon during printing
+set global.RunDaemon = false

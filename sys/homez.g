@@ -1,7 +1,7 @@
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "homing"
-  M98 P"/sys/lib/sb_leds.g"
+  ;M98 P"/sys/lib/sb_leds.g"
 
 M18 z
 M17 Z
@@ -16,4 +16,4 @@ M402
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
-  M98 P"/sys/lib/sb_leds.g"
+  ;M98 P"/sys/lib/sb_leds.g"

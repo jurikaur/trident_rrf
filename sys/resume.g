@@ -10,4 +10,4 @@ G1 E3 F3600 		; extrude 3mm of filament
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "printing"
-  M98 P"/sys/lib/sb_leds.g"
+  ;M98 P"/sys/lib/sb_leds.g"

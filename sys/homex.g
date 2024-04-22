@@ -6,7 +6,7 @@
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "homing"
-  M98 P"/sys/lib/sb_leds.g"
+  ;M98 P"/sys/lib/sb_leds.g"
 
 G91              ; relative positioning
 G1 H2 Z10 F7000   ; lift Z relative to current position
@@ -20,4 +20,4 @@ G90              ; absolute positioning
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
-  M98 P"/sys/lib/sb_leds.g"
+  ;M98 P"/sys/lib/sb_leds.g"
