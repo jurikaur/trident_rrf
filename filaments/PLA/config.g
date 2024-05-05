@@ -11,7 +11,7 @@ var FilamentType        = "PLA"       ; Input the filament type (only for the me
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-var PA                  = 0.055         ; PA Undertaker .4 + ProtoXtruder(HGX)
+var PA                  = 0.08         ; PA Undertaker .4 + ProtoXtruder(HGX)
 var RLen                = 0.400        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
 var RSpd                = 3600         ; Retraction speed (mm/min)

@@ -16,6 +16,8 @@ heat.tempSensePins = { ADC_0, ADC_1, ADC_2, ADC_3, ADC_4, ADC_5 }
 stepper.numSmartDrivers = 6
 stepper.DriverType = {tmc2240, tmc2240, none, tmc2240, tmc2240, tmc2240}
 stepper.spiChannel = 2
+//diag pins for sensorless
+//stepper.TmcDiagPins = { PG_12, PG_11 }
 
 // External Display settings
 serial.aux.rxTxPins = { PA_10, PA_9 }
