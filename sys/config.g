@@ -15,7 +15,7 @@ M586 P1 S1 ; configure FTP
 G4 S2
 
 ; Accelerometers
-M955 P121.0 I12 ; configure accelerometer on board #124
+M955 P124.0 I12 ; configure accelerometer on board #124
 
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
@@ -23,7 +23,7 @@ M569 P0.1 S1 D2 ; driver 0.1 goes forwards (Y axis)
 M569 P0.3 S0 D3 V2000 ; driver 0.2 goes backwards (Z axis)
 M569 P0.4 S0 D3 V2000 ; driver 0.3 goes backwards (Z axis)
 M569 P0.5 S0 D3 V2000 ; driver 0.4 goes backwards (Z axis)
-M569 P121.0 S0 D2 ; driver 121.0 goes forwards (extruder 0)
+M569 P124.0 S1 D2 ; driver 121.0 goes forwards (extruder 0)
 
 ; Motor Idle Current Reduction
 M906 I30 ; set motor current idle factor
@@ -40,7 +40,7 @@ M203 X18000 Y18000 Z720 ; set maximum speeds (mm/min)
 M201 X5000 Y4000 Z250 ; set accelerations (mm/s^2)
 
 ; Extruders
-M584 E121.0 ; set extruder mapping
+M584 E124.0 ; set extruder mapping
 ;M584 E5 ; ajutine
 M350 E16 I1 ; configure microstepping with interpolation
 M906 E700 ; set extruder driver currents wantai 1,88A motor
@@ -58,7 +58,7 @@ M201.1 X500 Y500 Z80 E500 ; Set reduced acceleration for special move types (mm/
 M669 K1 ; configure CoreXY kinematics
 
 ; Probes
-M558 K0 P8 C"121.io2.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
+M558 K0 P8 C"124.io1.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
 G31 P500 X0 Y28 Z4.8 ; set Z probe trigger value, offset and trigger height
 
 ; Endstops
@@ -70,7 +70,7 @@ M574 Z0 ; configure Z axis endstop
 
 ; Sensors
 M308 S0 P"out5" Y"thermistor" A"Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
-M308 S1 P"121.temp0" Y"pt1000" A"Hotend" ; configure sensor #1
+M308 S1 P"124.temp0" Y"pt1000" R1000 A"Hotend" ; configure sensor #1
 M308 S2 P"ADC_2" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
 
 ; Heaters
@@ -78,7 +78,7 @@ M950 H0 C"heat0" T0 ; create heater #0
 M143 H0 P0 T0 C0 S120 A0 ; configure heater monitor #0 for heater #0
 M143 H0 P1 T0 C0 S120 A2 ; configure heater monitor #1 for heater #0
 M143 H0 P2 T0 C0 S125 A1 ; configure heater monitor #2 for heater #0
-M950 H1 C"121.out0" T1 ; create heater #1
+M950 H1 C"124.out0" T1 ; create heater #1
 M143 H1 P0 T1 C0 S350 A0 ; configure heater monitor #0 for heater #1
 M950 H2 C"heat4" T2 ; create heater #2
 M143 H2 P0 T2 C0 S65 A0 ; configure heater monitor #0 for heater #2
@@ -92,16 +92,16 @@ M140 P0 H0 ; configure heated bed #0
 M141 P0 H2 ; configure heated chamber #0
 
 ; Fans
-M950 F0 C"121.out2" ; create fan #0
+M950 F0 C"124.out1" ; create fan #0
 M106 P0 C"Part Cooling" S0 L0 X1 B0.1 ; configure fan #0
-M950 F1 C"121.out1" ; create fan #1
+M950 F1 C"124.out2" ; create fan #1
 M106 P1 C"Hotend Fan" S0 B0.1 H1 T45 ; configure fan #1
 M950 F2 C"fan2" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
 M950 F3 C"fan8" ; create fan #3
 M106 P3 C"EXHAUSTF" S0 B0.1 ; configure fan #3
 M950 F4 C"fan6" ; create fan #4
-M106 P4 C"FILTER" S0 B0.1 H0 T60 ; configure fan #4
+M106 P4 C"FILTER" S0 B0.1 H0 T65 ; configure fan #4
 M950 F5 C"heat1" ; create fan #5
 M106 P5 C"Electronics Fan" H3 T45 ;S0 L0 X0.6 B0.1
 M950 F6 C"fan4" ; create Fan #6 - stepper cooling fan
@@ -123,7 +123,7 @@ T0 ; select first tool
 M308 S3 Y"mcu-temp" A"MCU"                       ; Configure sensor 3 as MCU temperature
 
 ; toolhead temp
-;M308 S12 Y"mcu-temp" P"124.dummy" A"RRF36 MCU"
+M308 S12 Y"mcu-temp" P"124.dummy" A"RRF36 MCU"
 
 ; highest tmc driver temp
 M308 S7 Y"drivers" A"max tmc temp"
@@ -134,7 +134,7 @@ M308 S9 Y"drivertemp" p"S7.1" A"Motor 1"
 M950 P0 C"heat2"                                  ; Create output Port0 attached to out1 connector for LED lights
 
 ;toolhead neopixel LEDs
-;M950 E0 C"124.rgbled" T2 Q2000000
+M950 E0 C"124.rgbled" T2 Q2000000
 ;M98 P"lib/toolhead-leds.g"
 
 ;Input Shaper

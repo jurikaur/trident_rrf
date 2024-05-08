@@ -1,7 +1,7 @@
 if sensors.probes[0].value[0] == 1000
   M564 H1
   G90
-  G1 X40 Y285 F3000
+  G1 X38 Y285 F3000
   G1 Y308
   G1 Y280
   M400 S1
