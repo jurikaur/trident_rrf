@@ -1,10 +1,10 @@
 if sensors.probes[0].value[0] == 1000
-  M564 H1
-  G90
-  G1 X38 Y285 F3000
-  G1 Y308
-  G1 Y280
-  M400 S1
+  M564 H1 ; forbid movement of axes that have not been homed
+  G90 ; Absolute Positioning
+  G1 X52 Y285 F3000 ; go to probe location
+  G1 Y305 ; activate bump-dock
+  G1 Y280 ; move away with deployed probe
+  M400 S1 ; Wait all moves to finish
   if sensors.probes[0].value[0] == 1000
     abort "Probe attach failed"
-G1 X150 Y150
+G1 X150 Y150 ; go to bed center

@@ -38,7 +38,6 @@ echo >>"job-history.csv" """" ^ job.lastFileName ^ """," ^ state.time ^ "," ^ jo
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
-  ;M98 P"/sys/lib/sb_leds.g"
 
 ; start Chamber ventilate
 set global.ventilateChamber = 15 ; set exhaust timer to 15min

@@ -3,10 +3,14 @@ if exists(global.sb_leds)
   set global.sb_leds = "leveling"
   ;M98 P"/sys/lib/sb_leds.g"
 
+var probe_height = 25
+if exists(global.z_probe_height)
+  set var.probe_height = global.z_probe_height  
+
 M561
 M558 K0 H8 F500 ;1000
 G90
-G1 Z12 ;F2000
+G1 Z{var.probe_height} ;F2000
 M401
 
 G30 K0 P0 X15 Y30 Z-99999

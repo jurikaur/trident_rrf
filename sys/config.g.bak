@@ -15,7 +15,7 @@ M586 P1 S1 ; configure FTP
 G4 S2
 
 ; Accelerometers
-M955 P124.0 I12 ; configure accelerometer on board #124
+M955 P124.0 I42 ; configure accelerometer on board #124
 
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
@@ -23,7 +23,7 @@ M569 P0.1 S1 D2 ; driver 0.1 goes forwards (Y axis)
 M569 P0.3 S0 D3 V2000 ; driver 0.2 goes backwards (Z axis)
 M569 P0.4 S0 D3 V2000 ; driver 0.3 goes backwards (Z axis)
 M569 P0.5 S0 D3 V2000 ; driver 0.4 goes backwards (Z axis)
-M569 P124.0 S0 D2 ; driver 121.0 goes forwards (extruder 0)
+M569 P124.0 S1 D2 ; driver 121.0 goes forwards (extruder 0)
 
 ; Motor Idle Current Reduction
 M906 I30 ; set motor current idle factor
@@ -45,7 +45,7 @@ M584 E124.0 ; set extruder mapping
 M350 E16 I1 ; configure microstepping with interpolation
 M906 E700 ; set extruder driver currents wantai 1,88A motor
 ;M92 E536.057598004908 ; Papilio Lite R3 extruder
-M92 E572 ; ProtoXtruder HGX gears
+M92 E681 ; Orbiter2
 ;M92 E607 ; configure steps per mm galileo2
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
@@ -58,8 +58,8 @@ M201.1 X500 Y500 Z80 E500 ; Set reduced acceleration for special move types (mm/
 M669 K1 ; configure CoreXY kinematics
 
 ; Probes
-M558 K0 P8 C"124.io1.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
-G31 P500 X0 Y28 Z4.8 ; set Z probe trigger value, offset and trigger height
+M558 K0 P8 C"124.io2.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
+G31 P500 X0 Y28 Z13 ; set Z probe trigger value, offset and trigger height
 
 ; Endstops
 ;M574 X2 P"121.io1.in" S1 ; configure X axis endstop
@@ -108,7 +108,7 @@ M950 F6 C"fan4" ; create Fan #6 - stepper cooling fan
 M106 P6 C"Stepper Fan" H7 T70 ; set to monitor highest stepper temp
 
 ; Tools
-M563 P0 S"Mosquito Magnum" D0 H1 F0 ; create tool #0
+M563 P0 S"Rapido2 & Undertaker" D0 H1 F0 ; create tool #0
 M568 P0 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
 
 ; Accessories
@@ -123,7 +123,10 @@ T0 ; select first tool
 M308 S3 Y"mcu-temp" A"MCU"                       ; Configure sensor 3 as MCU temperature
 
 ; toolhead temp
-M308 S12 Y"mcu-temp" P"124.dummy" A"RRF36 MCU"
+M308 S12 Y"thermistor" P"124.dummytemp1" A"RRF36 MCU" T100000 B4092
+
+; filament runout sensor
+M591 D0 P7 C"124.io0.in" L2.88 R75:125 E9 S1
 
 ; highest tmc driver temp
 M308 S7 Y"drivers" A"max tmc temp"
@@ -135,10 +138,10 @@ M950 P0 C"heat2"                                  ; Create output Port0 attached
 
 ;toolhead neopixel LEDs
 M950 E0 C"124.rgbled" T2 Q2000000
-;M98 P"lib/toolhead-leds.g"
+;M98 P"lib/sb_leds.g"
 
 ;Input Shaper
-M593 P"mzv" F33 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
+M593 P"mzv" F44 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
 
 ; Bed leveling
 M671 X-50:150:350 Y18:348:18 S5                  ; front left, back, front right

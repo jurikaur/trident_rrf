@@ -1,22 +1,21 @@
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "meshing"
-  ;M98 P"/sys/lib/sb_leds.g"
+
+;set z probe height variable
+var probe_height = 25
+if exists(global.z_probe_height)
+  set var.probe_height = global.z_probe_height 
 
 G90
-G1 Z10 F2400
-M401
-G29 S2
-;G1 Z10 F2400
-;G1 X150 Y128 F18000
-;G92 Z15
-;G30 K0 Z-99999
-G29 S0
+G1 Z{var.probe_height} F2400
+M401 ; Deploy probe
+G29 S2 ; Disable mesh bed compensation and clear the height map
+G29 S0 ; Probe the bed, save the height map in a file on the SD card, and activate mesh bed compensation
 if result != 0
   abort "Mesh probing failed"
-M402
+M402 ; Retract probe
 
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"
-  ;M98 P"/sys/lib/sb_leds.g"

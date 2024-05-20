@@ -67,6 +67,10 @@ if result != 0
 
 M116 P0
 
+; LED status
+if exists(global.sb_leds)
+  set global.sb_leds = "printing"
+
 M98 P"lib/clean-nozzle.g"
 
 ; intro line
@@ -76,10 +80,6 @@ G92 E0 ;zero the extruded length again
 
 M141 S-273.1 ; turn off fake chamber heater
 
-
-; LED status
-if exists(global.sb_leds)
-  set global.sb_leds = "printing"
 
 M42 P0 S0.4 ; turn chamber LED to 40%
 

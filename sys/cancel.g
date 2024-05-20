@@ -11,6 +11,8 @@ G1 E-5 F3600
 
 echo >>"job-history.csv" global.cancel_statistics
 
+;M98 P"lib/clean-nozzle.g"
+
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "ready"

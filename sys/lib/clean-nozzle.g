@@ -6,7 +6,7 @@ if heat.heaters[1].current < 190
   echo "Not cleaning a cold nozzle"
   M99
 
-G1 Z5 F2400
+G1 Z15 F2400
 
 M98 P"lib/purge-bucket.g"
 
@@ -18,5 +18,5 @@ G4 S2
 
 M98 P"lib/brush-nozzle.g" S0
 M98 P"lib/brush-nozzle.g" S1
-G1 Z10 F2400
+G1 Z20 F2400
 G1 Y300 F18000
