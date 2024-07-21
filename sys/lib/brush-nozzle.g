@@ -1,3 +1,7 @@
+var probe_height = 25
+if exists(global.z_probe_height)
+  set var.probe_height = global.z_probe_height
+
 G90
 if !exists(param.S) || param.S == 0
   G1 Y290 F18000 ; avoid hitting the probe dock
@@ -9,4 +13,4 @@ G1 X260 F5000
 G1 X220 Y304 F5000
 G1 X260 F5000
 G1 X220 Y307 F5000
-G1 Z18 F2400
+G1 Z{var.probe_height} F2400

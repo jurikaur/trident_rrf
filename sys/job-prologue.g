@@ -56,10 +56,12 @@ if var.need_g32
     abort "Z-Tilt failed"
 
 G10 P0 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
+;G10 P1 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
+;G10 P2 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
 
 ; bedmesh
 if var.need_g32
-  G29
+  G29 S0
 M402
 
 if result != 0

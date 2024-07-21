@@ -11,12 +11,13 @@ var FilamentType        = "PLA"       ; Input the filament type (only for the me
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-var PA                  = 0.065         ; PA Undertaker .4 + ProtoXtruder(HGX)
-var RLen                = 0.400        ; Retraction length (mm)
+;var PA                  = 0.065         ; 3D Jake ecoPLA
+var PA                  = 0.038        ; Polymaker Polyterra PLA
+var RLen                = 0.8        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
 var RSpd                = 3600         ; Retraction speed (mm/min)
 var URSpd               = 3600         ; Unretract speed (mm/min)
-var Z_Lift              = 0.25        ; Zlift amount (mm)
+var Z_Lift              = 0.1        ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"

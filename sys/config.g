@@ -15,7 +15,8 @@ M586 P1 S1 ; configure FTP
 G4 S2
 
 ; Accelerometers
-M955 P124.0 I42 ; configure accelerometer on board #124
+;M955 P124.0 I42 ; configure accelerometer on board #124 Orbiter right side mount
+M955 P124.0 I12 ; Back mount SHT36
 
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
@@ -23,7 +24,7 @@ M569 P0.1 S1 D2 ; driver 0.1 goes forwards (Y axis)
 M569 P0.3 S0 D3 V2000 ; driver 0.2 goes backwards (Z axis)
 M569 P0.4 S0 D3 V2000 ; driver 0.3 goes backwards (Z axis)
 M569 P0.5 S0 D3 V2000 ; driver 0.4 goes backwards (Z axis)
-M569 P124.0 S1 D2 ; driver 121.0 goes forwards (extruder 0)
+M569 P124.0 S0 D2 ; driver 121.0 goes forwards (extruder 0)
 
 ; Motor Idle Current Reduction
 M906 I30 ; set motor current idle factor
@@ -43,13 +44,16 @@ M201 X5000 Y4000 Z250 ; set accelerations (mm/s^2)
 M584 E124.0 ; set extruder mapping
 ;M584 E5 ; ajutine
 M350 E16 I1 ; configure microstepping with interpolation
-M906 E700 ; set extruder driver currents wantai 1,88A motor
-;M92 E536.057598004908 ; Papilio Lite R3 extruder
-M92 E681 ; Orbiter2
-;M92 E607 ; configure steps per mm galileo2
+M906 E750 I10 ; set extruder driver currents wantai 1,88A motor
+;M906 E800 I10 ; LDO motor drive current
+;M92 E713 ; Sharketype BMG
+M92 E570 ; Protoextruder HGX gears
+;M92 E681 ; Orbiter2
+;M92 E2270 ; Archetype kyro
+;M92 E613 ; configure steps per mm galileo2
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
-M201 E4000 ; set accelerations (mm/s^2)
+M201 E3000 ; set accelerations (mm/s^2)
 
 ; Reduced accelerations
 M201.1 X500 Y500 Z80 E500 ; Set reduced acceleration for special move types (mm/s²)
@@ -59,7 +63,7 @@ M669 K1 ; configure CoreXY kinematics
 
 ; Probes
 M558 K0 P8 C"124.io2.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
-G31 P500 X0 Y28 Z13 ; set Z probe trigger value, offset and trigger height
+G31 P500 X5 Y28 Z13 ; set Z probe trigger value, offset and trigger height
 
 ; Endstops
 ;M574 X2 P"121.io1.in" S1 ; configure X axis endstop
@@ -81,8 +85,8 @@ M143 H0 P2 T0 C0 S125 A1 ; configure heater monitor #2 for heater #0
 M950 H1 C"124.out0" T1 ; create heater #1
 M143 H1 P0 T1 C0 S350 A0 ; configure heater monitor #0 for heater #1
 M950 H2 C"heat4" T2 ; create heater #2
-M143 H2 P0 T2 C0 S65 A0 ; configure heater monitor #0 for heater #2
-M143 H2 P1 T2 C0 S65 A2 ; configure heater monitor #1 for heater #2
+M143 H2 P0 T2 C0 S68 A0 ; configure heater monitor #0 for heater #2
+M143 H2 P1 T2 C0 S68 A2 ; configure heater monitor #1 for heater #2
 M143 H2 P2 T2 C0 S70 A1 ; configure heater monitor #2 for heater #2
 
 ; Heated beds
@@ -92,9 +96,9 @@ M140 P0 H0 ; configure heated bed #0
 M141 P0 H2 ; configure heated chamber #0
 
 ; Fans
-M950 F0 C"124.out1" ; create fan #0
+M950 F0 C"124.out2" ; create fan #0
 M106 P0 C"Part Cooling" S0 L0 X1 B0.1 ; configure fan #0
-M950 F1 C"124.out2" ; create fan #1
+M950 F1 C"124.out1" ; create fan #1
 M106 P1 C"Hotend Fan" S0 B0.1 H1 T45 ; configure fan #1
 M950 F2 C"fan2" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
@@ -108,8 +112,17 @@ M950 F6 C"fan4" ; create Fan #6 - stepper cooling fan
 M106 P6 C"Stepper Fan" H7 T70 ; set to monitor highest stepper temp
 
 ; Tools
-M563 P0 S"Rapido2 & Undertaker" D0 H1 F0 ; create tool #0
+; tool#0
+M563 P0 S"Tool 0" D0 H1 F0 ; create tool #0 - Rapido2 & Undertaker
 M568 P0 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
+
+; tool#1
+;M563 P1 S"Tool 1" D0 H1 F0 ; create tool #1
+;M568 P1 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
+
+; tool#2
+;M563 P2 S"Tool 2" D0 H1 F0 ; create tool #2
+;M568 P2 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
 
 ; Accessories
 M575 P1 S1 B57600 ; configure PanelDue support
@@ -122,11 +135,13 @@ T0 ; select first tool
 ; Fly Super8Pro mcu temp
 M308 S3 Y"mcu-temp" A"MCU"                       ; Configure sensor 3 as MCU temperature
 
+M308 S4 P"ADC_1" Y"pt1000" A"hotend_test"
+
 ; toolhead temp
 M308 S12 Y"thermistor" P"124.temp1" A"RRF36 MCU" T100000 B4092
 
 ; filament runout sensor
-M591 D0 P7 C"124.io0.in" L2.88 R75:125 E9 S1
+;M591 D0 P7 C"124.io0.in" L2.88 R75:125 E9 S1
 
 ; highest tmc driver temp
 M308 S7 Y"drivers" A"max tmc temp"

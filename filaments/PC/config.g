@@ -14,11 +14,11 @@ var Default             = false        ; Use default settings (retraction and PA
 ;var PA                  = 0.045        ; Pressure advance amount (s) 0.4 brass nozzle
 ;var PA                  = 0.055         ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
 var PA                  = 0.0725        ; PA Undertaker .4 + ProtoXtruder(HGX)
-var RLen                = 0.40        ; Retraction length (mm)
+var RLen                = 0.7        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
-var RSpd                = 2100         ; Retraction speed (mm/min)
-var URSpd               = 1800         ; Unretract speed (mm/min)
-var Z_Lift              = 0.400        ; Zlift amount (mm)
+var RSpd                = 3000         ; Retraction speed (mm/min)
+var URSpd               = 3000         ; Unretract speed (mm/min)
+var Z_Lift              = 0.1        ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"

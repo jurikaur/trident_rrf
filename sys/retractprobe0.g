@@ -6,8 +6,8 @@ if sensors.probes[0].value[0] == 0
   M564 H1
   G90
   G1 X52 Y285 F3000
-  G1 Y305
-  G1 X75
+  G1 Y307
+  G1 X95
   M400 S1
   if sensors.probes[0].value[0] == 0
     abort "Probe detach failed"

@@ -5,7 +5,7 @@ if exists(global.sb_leds)
 
 var probe_height = 25
 if exists(global.z_probe_height)
-  set var.probe_height = global.z_probe_height  
+  set var.probe_height = global.z_probe_height
 
 M561
 M558 K0 H8 F500 ;1000

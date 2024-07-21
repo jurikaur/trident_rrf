@@ -1,6 +1,10 @@
+var probe_height = 25
+if exists(global.z_probe_height)
+  set var.probe_height = global.z_probe_height
+
 M400
 G91 ; relative positioning
-G1 Z15 F2400 ; move nozzle relative to position
+G1 Z{var.probe_height} F2400 ; move nozzle relative to position
 G90 ; absolute positioning
 
 M106 P0 S0 ; layer fan off
@@ -18,6 +22,8 @@ G1 E-5 F3600 ; retract 15mm to clear meltzone
 M400 ; wait for moves to finish
 
 G10 P0 S-273.1 R-273.1 ; turn off T0 toolhead
+;G10 P1 S-273.1 R-273.1 ; turn off T0 toolhead
+;G10 P2 S-273.1 R-273.1 ; turn off T0 toolhead
 M144 ; bed standby
 M140 S-273.1 ; turn off bed heater
 G92 E0 ; reset extrusion position
