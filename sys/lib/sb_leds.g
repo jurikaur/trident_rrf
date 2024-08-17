@@ -369,8 +369,8 @@ if global.sb_nozzle = "cold"                                                   ;
 ; ====================---------------------------------------------------------
 ; Activate leds according to selected status / mode
 ; ====================
-; Logo LED
-M150 E0 R{var.l_r} U{var.l_u} B{var.l_b} W{var.l_w} S1 F1
-
 ; Nozzle LEDs
-M150 E0 R{var.n_r} U{var.n_u} B{var.n_b} W{var.n_w} S2
+M150 E0 R{var.n_r} U{var.n_u} B{var.n_b} W{var.n_w} S2 F1
+
+; Logo LED
+M150 E0 R{var.l_r} U{var.l_u} B{var.l_b} W{var.l_w} S1

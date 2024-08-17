@@ -74,7 +74,7 @@ M574 Z0 ; configure Z axis endstop
 
 ; Sensors
 M308 S0 P"out5" Y"thermistor" A"Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
-M308 S1 P"124.temp0" Y"pt1000" R1000 A"Hotend" ; configure sensor #1
+M308 S1 P"124.temp0" Y"pt1000" R1000 A"Hotend" U-2.2727 V0.1136 ; configure sensor #1
 M308 S2 P"ADC_2" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
 
 ; Heaters
@@ -96,9 +96,9 @@ M140 P0 H0 ; configure heated bed #0
 M141 P0 H2 ; configure heated chamber #0
 
 ; Fans
-M950 F0 C"124.out2" ; create fan #0
+M950 F0 C"124.out1" ; create fan #0
 M106 P0 C"Part Cooling" S0 L0 X1 B0.1 ; configure fan #0
-M950 F1 C"124.out1" ; create fan #1
+M950 F1 C"124.out2" ; create fan #1
 M106 P1 C"Hotend Fan" S0 B0.1 H1 T45 ; configure fan #1
 M950 F2 C"fan2" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
@@ -113,7 +113,7 @@ M106 P6 C"Stepper Fan" H7 T70 ; set to monitor highest stepper temp
 
 ; Tools
 ; tool#0
-M563 P0 S"Tool 0" D0 H1 F0 ; create tool #0 - Rapido2 & Undertaker
+M563 P0 S"Tool 0" D0 H1 F0 ; create tool #0 Extruder #0 D0, heater #1 H1 and part cooling fan #0 F0
 M568 P0 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
 
 ; tool#1
