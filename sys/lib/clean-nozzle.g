@@ -23,4 +23,4 @@ G4 S2
 M98 P"lib/brush-nozzle.g" S0
 M98 P"lib/brush-nozzle.g" S1
 G1 Z{var.probe_height} F2400
-G1 Y300 F18000
+G1 Y302 F7000

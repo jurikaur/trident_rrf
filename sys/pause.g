@@ -12,7 +12,8 @@ G1 E-3 F2500		; retract 3mm
 G91					; relative moves
 G1 Z{var.probe_height} F5000			; raise nozzle 
 G90					; absolute moves
-M98 P"/sys/lib/purge-bucket.g"
+M98 P"/sys/lib/purge-bucket.g" ; move to purge bucket position
+;G1 X20 Y20
 
 ; LED status
 if exists(global.sb_leds)

@@ -13,8 +13,8 @@ board = fly_super8_pro_h723
 heat.tempSensePins = { ADC_0, ADC_1, ADC_2, ADC_3, ADC_4, ADC_5 }
 
 //stepper drivers
-stepper.numSmartDrivers = 6
-stepper.DriverType = {tmc2240, tmc2240, none, tmc2240, tmc2240, tmc2240}
+stepper.numSmartDrivers = 8
+stepper.DriverType = {tmc2240, tmc2240, none, tmc2240, tmc2240, tmc2240, none, tmc2240}
 stepper.spiChannel = 2
 //diag pins for sensorless
 //stepper.TmcDiagPins = { PG_12, PG_11 }

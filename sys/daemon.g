@@ -15,10 +15,10 @@ if exists(global.RunDaemon)
     ; --------------------
 
     ;Check sb_leds status
-    var SB_LEDS = true                                                           ; Turn on(true) / off(false) the Stealthburner led "system"
-    if var.SB_LEDS
-      if fileexists("/sys/lib/sb_leds.g")
-        M98 P"/sys/lib/sb_leds.g"                                      ; Check if global.sb_leds has changed since last run/loop
+    ;var SB_LEDS = true                                                           ; Turn on(true) / off(false) the Stealthburner led "system"
+    ;if var.SB_LEDS
+    ;  if fileexists("/sys/lib/sb_leds.g")
+    ;    M98 P"/sys/lib/sb_leds.g"                                      ; Check if global.sb_leds has changed since last run/loop
 
     ;ventilate Chamber
     if exists(global.ventilateChamber)

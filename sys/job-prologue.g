@@ -55,9 +55,10 @@ if var.need_g32
   if result != 0
     abort "Z-Tilt failed"
 
+M98 P"/sys/lib/purge-bucket.g" ; move to purge bucket position
+
 G10 P0 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
-;G10 P1 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
-;G10 P2 S{param.T} R50 ; start preheat hotend_0 can be later because rapido heats so rapidly
+T0 ; activate tool #0
 
 ; bedmesh
 if var.need_g32
@@ -67,18 +68,16 @@ M402
 if result != 0
   abort "Mesh failed"
 
-M116 P0
+M116 P0 ; wait for nozzle to heat up
+G92 E0
+G1 E40 F600 ; prime hot nozzle
+G92 E0
 
 ; LED status
 if exists(global.sb_leds)
   set global.sb_leds = "printing"
 
 M98 P"lib/clean-nozzle.g"
-
-; intro line
-G1 X297 Y150 Z1 F12000
-G1      Y50 Z{param.L} E30 F500 ;intro line
-G92 E0 ;zero the extruded length again
 
 M141 S-273.1 ; turn off fake chamber heater
 

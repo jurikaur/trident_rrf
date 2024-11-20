@@ -16,15 +16,15 @@ G4 S2
 
 ; Accelerometers
 ;M955 P124.0 I42 ; configure accelerometer on board #124 Orbiter right side mount
-M955 P124.0 I12 ; Back mount SHT36
+;M955 P124.0 I12 ; Back mount SHT36
 
 ; Smart Drivers
-M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
-M569 P0.1 S1 D2 ; driver 0.1 goes forwards (Y axis)
-M569 P0.3 S0 D3 V2000 ; driver 0.2 goes backwards (Z axis)
-M569 P0.4 S0 D3 V2000 ; driver 0.3 goes backwards (Z axis)
-M569 P0.5 S0 D3 V2000 ; driver 0.4 goes backwards (Z axis)
-M569 P124.0 S1 D2 ; driver 121.0 goes forwards (extruder 0)
+M569 P0.0 S1 D2; driver 0.0 goes forwards (X axis)
+M569 P0.1 S1 D2; driver 0.1 goes forwards (Y axis)
+M569 P0.3 S0 D3; driver 0.2 goes backwards (Z axis)
+M569 P0.4 S0 D3; driver 0.3 goes backwards (Z axis)
+M569 P0.5 S0 D3; driver 0.4 goes backwards (Z axis)
+M569 P0.7 S0 D2; driver 0.7 goes forwards (extruder 0)
 
 ; Motor Idle Current Reduction
 M906 I30 ; set motor current idle factor
@@ -32,21 +32,24 @@ M84 S30 ; set motor current idle timeout
 
 ; Axes
 M584 X0.0 Y0.1 Z0.3:0.4:0.5 ; set axis mapping
-M350 X32 Y32 Z8 I1 ; configure microstepping with interpolation
+M350 X32 Y32 I1 ; configure xy microsteping with interpolation
+;M350 X64 Y64 I0 ; configure xy microsteping with interpolation
+M350 Z8 I1 ; configure Z microstepping with interpolation
 M906 X1700 Y1700 Z1000 ; set axis driver currents
 M92 X160 Y160 Z400 ; configure steps per mm
-M208 X0:300 Y0:308 Z0:240 ; set minimum and maximum axis limits
+;M92 X320 Y320 Z400 ; configure steps per mm
+M208 X0:296 Y11:308 Z0:240 ; set minimum and maximum axis limits
 M566 X600 Y600 Z12 ; set maximum instantaneous speed changes (mm/min)
-M203 X18000 Y18000 Z720 ; set maximum speeds (mm/min)
-M201 X5000 Y4000 Z250 ; set accelerations (mm/s^2)
+M203 X15000 Y15000 Z720 ; 18000 set maximum speeds (mm/min)
+M201 X5000 Y5000 Z150 ; 5000,4000 set accelerations (mm/s^2)
 
 ; Extruders
-M584 E124.0 ; set extruder mapping
+M584 E0.7 ; set extruder mapping
 ;M584 E5 ; ajutine
 M350 E16 I1 ; configure microstepping with interpolation
 M906 E750 I10 ; set extruder driver currents wantai 1,88A motor
 ;M906 E800 I10 ; LDO motor drive current
-M92 E713 ; Sharketype BMG
+M92 E702 ; Sharketype BMG
 ;M92 E570 ; Protoextruder HGX gears
 ;M92 E681 ; Orbiter2
 ;M92 E2270 ; Archetype kyro
@@ -62,19 +65,17 @@ M201.1 X500 Y500 Z80 E500 ; Set reduced acceleration for special move types (mm/
 M669 K1 ; configure CoreXY kinematics
 
 ; Probes
-M558 K0 P8 C"124.io2.in" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
+M558 K0 P8 C"io2" H2 F600:180 T18000 A10 S0.01 ; configure unfiltered digital probe via slot #0
 G31 P500 X5 Y28 Z13 ; set Z probe trigger value, offset and trigger height
 
 ; Endstops
-;M574 X2 P"121.io1.in" S1 ; configure X axis endstop
-M574 X2 S3
-;M574 Y2 P"io2" S1 ; configure Y axis endstop
-M574 Y2 S3
+M574 X2 P"io0" S1 ; configure X axis endstop
+M574 Y2 P"io1" S1 ; configure Y axis endstop
 M574 Z0 ; configure Z axis endstop
 
 ; Sensors
 M308 S0 P"out5" Y"thermistor" A"Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
-M308 S1 P"124.temp0" Y"pt1000" R1000 A"Hotend" U-2.2727 V0.1136 ; configure sensor #1
+M308 S1 P"ADC_1" Y"pt1000" A"Hotend" ; configure sensor #1
 M308 S2 P"ADC_2" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
 
 ; Heaters
@@ -82,7 +83,7 @@ M950 H0 C"heat0" T0 ; create heater #0
 M143 H0 P0 T0 C0 S120 A0 ; configure heater monitor #0 for heater #0
 M143 H0 P1 T0 C0 S120 A2 ; configure heater monitor #1 for heater #0
 M143 H0 P2 T0 C0 S125 A1 ; configure heater monitor #2 for heater #0
-M950 H1 C"124.out0" T1 ; create heater #1
+M950 H1 C"heat3" T1 ; create heater #1
 M143 H1 P0 T1 C0 S350 A0 ; configure heater monitor #0 for heater #1
 M950 H2 C"heat4" T2 ; create heater #2
 M143 H2 P0 T2 C0 S68 A0 ; configure heater monitor #0 for heater #2
@@ -96,18 +97,18 @@ M140 P0 H0 ; configure heated bed #0
 M141 P0 H2 ; configure heated chamber #0
 
 ; Fans
-M950 F0 C"124.out1" ; create fan #0
+M950 F0 C"fan7" ; create fan #0
 M106 P0 C"Part Cooling" S0 L0 X1 B0.1 ; configure fan #0
-M950 F1 C"124.out2" ; create fan #1
+M950 F1 C"fan9" ; create fan #1
 M106 P1 C"Hotend Fan" S0 B0.1 H1 T45 ; configure fan #1
 M950 F2 C"fan2" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
 M950 F3 C"fan8" ; create fan #3
 M106 P3 C"EXHAUSTF" S0 B0.1 ; configure fan #3
 M950 F4 C"fan6" ; create fan #4
-M106 P4 C"FILTER" S0 B0.1 H0 T65 ; configure fan #4
+M106 P4 C"FILTER" S0 B0.1 ;H0 T65 ; configure fan #4
 M950 F5 C"heat1" ; create fan #5
-M106 P5 C"Electronics Fan" H3 T45 ;S0 L0 X0.6 B0.1
+M106 P5 C"Electronics Fan" H3 T50 ;S0 L0 X0.6 B0.1
 M950 F6 C"fan4" ; create Fan #6 - stepper cooling fan
 M106 P6 C"Stepper Fan" H7 T70 ; set to monitor highest stepper temp
 
@@ -115,14 +116,6 @@ M106 P6 C"Stepper Fan" H7 T70 ; set to monitor highest stepper temp
 ; tool#0
 M563 P0 S"Tool 0" D0 H1 F0 ; create tool #0 Extruder #0 D0, heater #1 H1 and part cooling fan #0 F0
 M568 P0 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
-
-; tool#1
-;M563 P1 S"Tool 1" D0 H1 F0 ; create tool #1
-;M568 P1 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
-
-; tool#2
-;M563 P2 S"Tool 2" D0 H1 F0 ; create tool #2
-;M568 P2 R0 S0 ; set initial tool #0 active and standby temperatures to 0C
 
 ; Accessories
 M575 P1 S1 B57600 ; configure PanelDue support
@@ -135,10 +128,8 @@ T0 ; select first tool
 ; Fly Super8Pro mcu temp
 M308 S3 Y"mcu-temp" A"MCU"                       ; Configure sensor 3 as MCU temperature
 
-M308 S4 P"ADC_1" Y"pt1000" A"hotend_test"
-
 ; toolhead temp
-M308 S12 Y"thermistor" P"124.temp1" A"RRF36 MCU" T100000 B4092
+;M308 S12 Y"thermistor" P"124.temp1" A"RRF36 MCU" T100000 B4092
 
 ; filament runout sensor
 ;M591 D0 P7 C"124.io0.in" L2.88 R75:125 E9 S1
@@ -152,15 +143,18 @@ M308 S9 Y"drivertemp" p"S7.1" A"Motor 1"
 M950 P0 C"heat2"                                  ; Create output Port0 attached to out1 connector for LED lights
 
 ;toolhead neopixel LEDs
-M950 E0 C"124.rgbled" T2 Q2000000
+; M950 E0 C"124.rgbled" T2 Q2000000
 ;M98 P"lib/sb_leds.g"
 
 ;Input Shaper
-M593 P"mzv" F44 S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
+M593 P"mzv" F40 ;S0.01 L0.15                           ; disabled 3.5.0rc1 has layer shift issues when IS enabled
 
 ; Bed leveling
 M671 X-50:150:350 Y18:348:18 S5                  ; front left, back, front right
 M557 X15:285 Y30:285 P5                         ; define grid for mesh bed compensation, bed mesh distance 83mm to get 4x4 square
+
+;slew compensation
+M556 S100 X-0.167                                ; califlower 150mm calculated 31.10.2024
 
 ; Load Global vars
 M98 P"lib/globals.g"
