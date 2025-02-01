@@ -7,18 +7,18 @@
 
 ; Filament settings
 
-var FilamentType        = "PC"       ; Input the filament type (only for the message)
+var FilamentType        = "PC"         ; Input the filament type (only for the message)
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-;var PA                  = 0.045        ; Pressure advance amount (s) 0.4 brass nozzle
-;var PA                  = 0.055         ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
-var PA                  = 0.0725        ; PA Undertaker .4 + ProtoXtruder(HGX)
-var RLen                = 0.7        ; Retraction length (mm)
+;var PA                  = 0.045       ; Pressure advance amount (s) 0.4 brass nozzle
+;var PA                  = 0.055       ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
+var PA                  = 0.0725       ; PA Undertaker .4 + ProtoXtruder(HGX)
+var RLen                = 0.7          ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
 var RSpd                = 3000         ; Retraction speed (mm/min)
 var URSpd               = 3000         ; Unretract speed (mm/min)
-var Z_Lift              = 0.1        ; Zlift amount (mm)
+var Z_Lift              = 0            ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"

@@ -1,0 +1,4 @@
+; Filament load macro
+echo "Filament load "
+
+G1 E100 F300

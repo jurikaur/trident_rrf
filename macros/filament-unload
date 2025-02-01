@@ -1,0 +1,3 @@
+; Filament unload macro
+echo "Filament unload "
+G1 E-100 F600

@@ -24,6 +24,7 @@ if exists(global.RunDaemon)
     if exists(global.ventilateChamber)
       if global.ventilateChamber <= 0
         M106 P3 S0 ; stop exhaust
+        M98 P"0:/macros/Air filtration/Air filtration OFF"                          ; turn off air filtration fan
     
       if global.ventilateChamber > 0
         M106 P3 S1

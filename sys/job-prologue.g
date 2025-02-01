@@ -62,7 +62,10 @@ T0 ; activate tool #0
 
 ; bedmesh
 if var.need_g32
-  G29 S0
+  G29
+else
+  G29
+
 M402
 
 if result != 0

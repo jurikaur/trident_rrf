@@ -31,10 +31,10 @@ var Message2 = "N/A"
 
 if !var.Default
   ; Pressure Advance
-  M572 D0 S{var.PA}                                                            ; Set extruder 0 pressure advance to 0.1 seconds
+  ;M572 D0 S{var.PA}                                                            ; Set extruder 0 pressure advance to 0.1 seconds
 
   ;Retraction & Zlift
-  M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
+  ;M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
 
 ; ====================---------------------------------------------------------
 ; Define & send messages

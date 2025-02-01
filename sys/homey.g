@@ -12,15 +12,27 @@ if exists(global.sb_leds)
   ;M98 P"/sys/lib/sb_leds.g"
 
 G91              ; relative positioning
-G1 H2 Z10 F7000   ; lift Z relative to current position
+;G1 H2 Z10 F7000   ; lift Z relative to current position
+
+if sensors.endstops[1].triggered = true     ; if we're hard against the endstop we need to move away
+	M564 H0 S0
+	G1 Y-20 F1200
+	M564 H1 S1
+	M400
+	if sensors.endstops[1].triggered = true
+		abort "Y Endstop appears to be faulty.  Still in triggered state."
 
 ; Home Y axis
 G1 Y400 F3600 H1                                                             ; Move Y axis max and stop there
+if result != 0
+	abort "Print cancelled due error during fast homing"
 G1 Y{0 -var.SBD} F12000                                                       ; Move away from axis max
 G1 Y400 F360 H1                                                             ; Move Y axis max and stop there
+if result != 0
+	abort "Print cancelled due error during fast homing"
 G1 Y{0 -var.SBD} F12000                                                       ; Move away from axis max
 
-G1 H2 Z-10 F7000  ; lower Z again
+;G1 H2 Z-10 F7000  ; lower Z again
 G90              ; absolute positioning
 
 ; LED status

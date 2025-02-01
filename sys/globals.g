@@ -40,6 +40,6 @@ if !exists(global.Cancelled)												; checks for the existence of global.Can
 if !exists(global.useAutoZ)													; checks for the existence of global.useAutoZ
 	global useAutoZ = false													; if it doesn't exist, set the value to false
 if !exists(global.generateMesh)												; checks for the existence of global.generateMesh
-	global generateMesh = false												; if it doesn't exist, set the value to false
+	global generateMesh = true												; if it doesn't exist, set the value to false
 if !exists(global.generatePrintOnlyMesh)									; checks for the existence of global.generatePrintOnlyMesh
-	global generatePrintOnlyMesh = false									; if it doesn't exist, set the value to false
+	global generatePrintOnlyMesh = true									; if it doesn't exist, set the value to false
