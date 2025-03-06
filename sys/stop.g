@@ -14,7 +14,7 @@ M221 D0 S100 ; reset extruder factor to 100%
 G1 E-2 F3600 ; retract 2mm
 
 ;M98 P"/sys/lib/purge-bucket.g" ; move to purge bucket position
-G1 X150 Y200 Z270 ; park nozzle X150 Y100 to allow next sensorless homing to have some speed for stall detection
+G1 X150 Y200 Z269 ; park nozzle X150 Y100 to allow next sensorless homing to have some speed for stall detection
 
 G1 E2 F3600 ; unretract previous amount before ramming
 G1 E1 F400  ; unretract 1mm
@@ -30,7 +30,7 @@ G92 E0 ; reset extrusion position
 M84 ; stop all motors
 M141 S-273.1 ; turn off chamber heater
 M42 P0 S0
-M106 P2 S0
+M106 P2 S0 ; turn off bed fans
 
 ; log successful printing
 var extrusion = 0
@@ -46,7 +46,7 @@ if exists(global.sb_leds)
   set global.sb_leds = "ready"
 
 ; start Chamber ventilate
-set global.ventilateChamber = 15 ; set exhaust timer to 15min
+set global.ventilateChamber = 30 ; set exhaust timer to 15min
 
 ; enable daemon
 set global.RunDaemon = true

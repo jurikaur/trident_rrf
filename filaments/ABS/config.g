@@ -17,9 +17,9 @@ var PA                  = 0.037        ; 0.044 Pressure advance amount (s) 0.4 b
 ;var PA                  = 0.0475        ; Orbiter 2, Undertaker
 var RLen                = 0.4        ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
-var RSpd                = 2700         ; Retraction speed (mm/min)
-var URSpd               = 2100         ; Unretract speed (mm/min)
-var Z_Lift              = 0.1        ; Zlift amount (mm)
+var RSpd                = 3600         ; Retraction speed (mm/min)
+var URSpd               = 3600         ; Unretract speed (mm/min)
+var Z_Lift              = 0        ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"
@@ -28,6 +28,7 @@ var Message2 = "N/A"
 ; ====================---------------------------------------------------------
 ; Config section
 ; ====================
+;M106 P2 S0.6 ; start bed fans to help heat chamber
 
 if !var.Default
   ; Pressure Advance

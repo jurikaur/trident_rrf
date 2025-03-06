@@ -13,10 +13,17 @@ set global.Cancelled = false                                                ; re
 set global.slicerBedTemp = param.A                                          ; this updates the global variable slicerBedTemp to be equal to param.A
 set global.slicerHotendTemp = param.C                                       ; this updates the global variable slicerHotendTemp to be equal to param.C
 
+set global.ventilateChamber = 0                                             ; chamber ventilation timer 0
+set global.RunDaemon = false                                                ; disable daemon
+
+M141 S-273.1                                                                ; turn off fake chamber heater
+
 if global.nozzleDiameterInstalled != param.D                                ; this checks the gcode to ensure it matches the nozzle size installed in the printer
 	abort "This gcode is for a different nozzle diameter"                     ; abort the gcode as the nozzle size doesn't match
 
 ;M98 P"0:/macros/LED/LED 100%"                                               ; turn on the LED
+
+G28                                                                         ; Home cold printer to raise bed
 
 if global.slicerBedTempOverride == 0										; check whether the bed temperature should be overriden
 	M190 S{param.A}															; set Bed Temperature to whatever is set in slicer
@@ -24,6 +31,8 @@ else
 	M190 S{global.slicerBedTempOverride}										; set bed temperature to the override temperature set in btncmd instead
  
 M98 P"0:/macros/Air filtration/Air filtration 25%"                          ; turn on air filtration fan to 25%
+
+M106 P2 S0.6                                                                ; start bed fans to help heat chamber
 
 if param.B = "ABS" || param.B = "ASA" || param.B = "PC"
 	if !global.soakTimeOverride & global.soakTime != 0                        ; check whether the chamber temperature soak time should be overriden
@@ -35,7 +44,7 @@ if global.Cancelled = true                                                  ; al
 		abort "Print cancelled."
 else  
 	G28                                                                       ; home the printer
-	
+
 if global.Cancelled = true                                                  ; allows print to be cancelled at this point
 	M291 P"Print has been cancelled" S0 T3
 	G4 S3
@@ -59,4 +68,6 @@ if global.slicerHotendTempOverride == 0										; check whether the hotend temp
 else
 	M568 P0 S{global.slicerHotendTempOverride} A2							    ; set hotend temperature to the override temperature set in btncmd instead
 M116 P0                                                                     ; wait for this temperature to be reached
+
+G1 E40 F600                                                                  ;rePrime hotend
 M98 P"Nozzle-clean.g"														; clean nozzle

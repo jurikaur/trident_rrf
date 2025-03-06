@@ -11,15 +11,15 @@ var FilamentType        = "ASA"       ; Input the filament type (only for the me
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-var PA                  = 0.07        ; VolcMosq
-;var PA                  = 0.055         ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
+;var PA                  = 0.07        ; VolcMosq
+var PA                  = 0.055         ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
 ;var PA                  = 0.037       ; PA Undertaker .4 + ProtoXtruder(HGX)
 ;var PA                  = 0.035        ; PA Undertaker .4 + Sharketype
-var RLen                = 0.2        ; Retraction length (mm)
+var RLen                = 0.4          ; Retraction length (mm)
 var X_URLen             = 0.000        ; Extra unretract length (mm)
 var RSpd                = 3600         ; Retraction speed (mm/min)
 var URSpd               = 3600         ; Unretract speed (mm/min)
-var Z_Lift              = 0.1        ; Zlift amount (mm)
+var Z_Lift              = 0            ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"
@@ -28,13 +28,13 @@ var Message2 = "N/A"
 ; ====================---------------------------------------------------------
 ; Config section
 ; ====================
-
+;M106 P2 S0.6 ; start bed fans to help heat chamber
 if !var.Default
   ; Pressure Advance
-  ;M572 D0 S{var.PA}                                                            ; Set extruder 0 pressure advance to 0.1 seconds
+  M572 D0 S{var.PA}                                                            ; Set extruder 0 pressure advance to 0.1 seconds
 
   ;Retraction & Zlift
-  ;M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
+  M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
 
 ; ====================---------------------------------------------------------
 ; Define & send messages

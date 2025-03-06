@@ -22,14 +22,8 @@ if exists(global.RunDaemon)
 
     ;ventilate Chamber
     if exists(global.ventilateChamber)
-      if global.ventilateChamber <= 0
-        M106 P3 S0 ; stop exhaust
-        M98 P"0:/macros/Air filtration/Air filtration OFF"                          ; turn off air filtration fan
-    
-      if global.ventilateChamber > 0
-        M106 P3 S1
-        set global.ventilateChamber = ((global.ventilateChamber*60000)-250)/60000
+      M98 P"0:/macros/ventilateChamber"                          ; turn off air filtration fan
     
   ; ---------------------------------------------------------------------------
-  ; Daemon loop delay
-  G4 P250                                                                      ; Delay running again or next command for at least 0,25 seconds
+    ; Daemon loop delay
+    G4 S10                                                                      ; Delay running again or next command for at least 0,25 seconds

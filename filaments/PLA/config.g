@@ -1,10 +1,5 @@
-; filaments/PLA/config.g  (v2.1)
-; Called when M703 is sent and PLA is loaded
-
-; ====================---------------------------------------------------------
-; Settings section
-; ====================
-
+;M307 H1 R11.861 K2.821:0.000 D0.99 E1.35 S1.00 B0 V24.1 ; Load heater tuning parameters for 200C
+M307 H1 R6.653 K1.315:0.197 D1.16 E1.35 S1.00 B0 V24.2
 ; Filament settings
 
 var FilamentType        = "PLA"       ; Input the filament type (only for the message)
@@ -33,25 +28,3 @@ if !var.Default
 
   ;Retraction & Zlift
   M207 S{var.RLen} R{var.X_URLen} F{var.RSpd} T{var.URSpd} Z{var.Z_Lift}       ; Set firmware retraction length, extra un-retract lenght, retract speed, unretract speed & zlift
-
-; ====================---------------------------------------------------------
-; Define & send messages
-; ====================
-
-if var.Default
-  set var.Message1 = "" ^ var.FilamentType ^ " config applied (default settings)"
-else
-  set var.Message1 = "" ^ var.FilamentType ^ " config applied"
-  
-if move.extruders[0].pressureAdvance = 0
-  set var.Message2 = "Pressure Advance disabled"
-else
-  set var.Message2 = "Pressure Advance set to " ^ move.extruders[0].pressureAdvance ^ " seconds"
-
-; Config applied message
-M118 P0 S{var.Message1}                                                        ; Send message to DWC
-M118 P2 S{var.Message1}                                                        ; Send message to PanelDue
-
-; Pressure advance info message
-M118 P0 S{var.Message2}                                                        ; Send message to DWC
-M118 P2 S{var.Message2}                                                        ; Send message to PanelDue

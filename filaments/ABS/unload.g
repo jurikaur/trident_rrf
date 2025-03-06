@@ -20,7 +20,7 @@ var Message2 = "N/A"
 ; Generate message
 set var.Message2 = "" ^ var.FilamentType ^ " filament unloaded"
 
-M98 P"/sys/lib/fw_retraction.g"                                       
+M98 P"/sys/fw_retraction.g"                                       
 M572 D0 S0.0 ; Disable Pressure Advance
 
 ; PA disabled message

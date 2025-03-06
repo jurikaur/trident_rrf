@@ -1,5 +1,5 @@
-; filaments/PLA/config.g  (v2.1)
-; Called when M703 is sent and PLA is loaded
+; filaments/ABS/config.g  (v2.1)
+; Called when M703 is sent and ABS is loaded
 
 ; ====================---------------------------------------------------------
 ; Settings section
@@ -7,16 +7,18 @@
 
 ; Filament settings
 
-var FilamentType        = "PETG"       ; Input the filament type (only for the message)
+var FilamentType        = "PC"         ; Input the filament type (only for the message)
 
 var Default             = false        ; Use default settings (retraction and PA), true/yes or false/no
 
-var PA                  = 0.039        ; pressure advance
-var RLen                = 1.2        ; Retraction length (mm)
-var X_URLen             = 0.00        ; Extra unretract length (mm)
-var RSpd                = 1500         ; Retraction speed (mm/min)
-var URSpd               = 1800         ; Unretract speed (mm/min)
-var Z_Lift              = 0.00        ; Zlift amount (mm)
+;var PA                  = 0.045       ; Pressure advance amount (s) 0.4 brass nozzle
+;var PA                  = 0.055       ; Pressure advance for Undertaker 0.4 TC nozzle + galileo2 extruder
+var PA                  = 0.0725       ; PA Undertaker .4 + ProtoXtruder(HGX)
+var RLen                = 0.7          ; Retraction length (mm)
+var X_URLen             = 0.000        ; Extra unretract length (mm)
+var RSpd                = 3000         ; Retraction speed (mm/min)
+var URSpd               = 3000         ; Unretract speed (mm/min)
+var Z_Lift              = 0            ; Zlift amount (mm)
 
 ; Message placeholders
 var Message1 = "N/A"
