@@ -30,7 +30,7 @@ G92 E0 ; reset extrusion position
 M84 ; stop all motors
 M141 S-273.1 ; turn off chamber heater
 M42 P0 S0
-M106 P2 S0 ; turn off bed fans
+M98 P"0:/macros/Bed Fans/Bed Fan OFF" ; turn off bed fans
 
 ; log successful printing
 var extrusion = 0

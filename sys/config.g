@@ -69,6 +69,7 @@ M671 X-50:150:350 Y18:348:18 S5              ; front left, back, front right
 M574 X2 P"io1.in" S1 ; configure X axis endstop
 M574 Y2 P"io2.in" S1 ; configure Y axis endstop
 M574 Z0 ; configure Z axis endstop
+;M574 Z1 P"io3.in" S1 ; configure Z axis endstop
 
 ; Sensors
 M308 S0 P"temp0" Y"thermistor" A"Heated Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
@@ -97,9 +98,9 @@ M950 F0 C"out4+out4.tach" ; create fan #0
 M106 P0 C"HEF" S0 B0.1 H1 T45 ; configure fan #0
 M950 F1 C"out5" ; create fan #1
 M106 P1 C"PCF" S0 L0 X1 B0.1 ; configure fan #1
-M950 F2 C"out7" ; create fan #2
+M950 F2 C"1.out7" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
-M950 F3 C"out6" ; create fan #3
+M950 F3 C"1.out5" ; create fan #3
 M106 P3 C"Filter" S0 L0 X1 B0.1 ; configure fan #3
 
 ; Camera

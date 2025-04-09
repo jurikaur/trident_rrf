@@ -9,3 +9,4 @@ if sensors.probes[0].value[0] == 1000
   if sensors.probes[0].value[0] == 1000
     abort "Probe attach failed"
 G1 X150 Y150 ; go to bed center
+;G1 X181 Y274 F6000 ; go to Z enstop

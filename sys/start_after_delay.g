@@ -108,7 +108,6 @@ while state.time < var.RunTime
 			M291 P"Soak Time Overriden" S0 T3
 			break
 	
-	M106 P2 S0.60 ; set bed fans to 50% to heat chamber
 	M98 P"0:/macros/Air filtration/Air filtration 100%"                          ; turn on air filtration fan to 100%
 
 	if exists(param.X)
