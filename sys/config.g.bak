@@ -23,9 +23,9 @@ G4 S2
 M950 E0 C"led" T0 ; configure LED strip #0
 
 ; Smart Drivers
-;M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
+M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
 M569 P0.1 S1 D2 ; driver 0.1 goes forwards (X axis)
-;M569 P0.2 S1 D2 ; driver 0.2 goes forwards (Y axis)
+M569 P0.2 S1 D2 ; driver 0.2 goes forwards (Y axis)
 M569 P0.3 S1 D2 ; driver 0.3 goes forwards (Y axis)
 M569 P0.5 S0 D2 ; driver 0.5 goes backwards (extruder 0)
 M569 P1.0 S1 D2 ; driver 1.0 goes forwards (Z axis)
@@ -37,15 +37,15 @@ M906 I30 ; set motor current idle factor
 M84 S30 ; set motor current idle timeout
 
 ; Axes
-;M584 X0.0:0.1 Y0.2:0.3 Z1.0:1.1:1.2 ; set axis mapping
-M584 X0.1 Y0.3 Z1.0:1.1:1.2 ; set axis mapping
-M350 X16 Y16 Z16 I1 ; configure microstepping with interpolation
-M906 X2000 Y2000 Z1000 ; set axis driver currents
-M92 X80 Y80 Z400 ; configure steps per mm
+M584 X0.0:0.1 Y0.2:0.3 Z1.0:1.1:1.2 ; set axis mapping
+;M584 X0.1 Y0.3 Z1.0:1.1:1.2 ; set axis mapping
+M350 X32 Y32 Z16 I1 ; configure microstepping with interpolation
+M906 X1700 Y1700 Z1000 ; set axis driver currents
+M92 X160 Y160 Z400 ; configure steps per mm
 M208 X16:297 Y2:308 Z0:269 ; set minimum and maximum axis limits
-M566 X420 Y420 Z12 ; set maximum instantaneous speed changes (mm/min)
+M566 X900 Y900 Z12 ; set maximum instantaneous speed changes (mm/min)
 M203 X27000 Y27000 Z720 ; set maximum speeds (mm/min)
-M201 X10000 Y10000 Z150 ; set accelerations (mm/s^2)
+M201 X20000 Y20000 Z150 ; set accelerations (mm/s^2)
 
 ; Extruders
 M584 E0.5 ; set extruder mapping

@@ -39,13 +39,13 @@ M84 S30 ; set motor current idle timeout
 ; Axes
 M584 X0.0:0.1 Y0.2:0.3 Z1.0:1.1:1.2 ; set axis mapping
 ;M584 X0.1 Y0.3 Z1.0:1.1:1.2 ; set axis mapping
-M350 X16 Y16 Z16 I1 ; configure microstepping with interpolation
-M906 X2000 Y2000 Z1000 ; set axis driver currents
-M92 X80 Y80 Z400 ; configure steps per mm
+M350 X32 Y32 Z16 I1 ; configure microstepping with interpolation
+M906 X1700 Y1700 Z1000 ; set axis driver currents
+M92 X160 Y160 Z400 ; configure steps per mm
 M208 X16:297 Y2:308 Z0:269 ; set minimum and maximum axis limits
-M566 X420 Y420 Z12 ; set maximum instantaneous speed changes (mm/min)
+M566 X900 Y900 Z12 ; set maximum instantaneous speed changes (mm/min)
 M203 X27000 Y27000 Z720 ; set maximum speeds (mm/min)
-M201 X10000 Y10000 Z150 ; set accelerations (mm/s^2)
+M201 X20000 Y20000 Z150 ; set accelerations (mm/s^2)
 
 ; Extruders
 M584 E0.5 ; set extruder mapping
@@ -112,7 +112,7 @@ M568 P0 R0 S0               ; set initial tool #0 active and standby temperature
 ; Miscellaneous
 T0 ; select first tool
 M556 S100 X-0.056 ; fix skew
-M593 P"mzv" F103 ; dampen resonances
+M593 P"mzv" F71 ; dampen resonances
 
 M955 P0 C"spi.cs1+spi.cs0" I25; all wires connected to temp DB connector, no temperature daughterboard
 

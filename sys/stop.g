@@ -46,7 +46,8 @@ if exists(global.sb_leds)
   set global.sb_leds = "ready"
 
 ; start Chamber ventilate
-set global.ventilateChamber = 30 ; set exhaust timer to 15min
+if move.extruders[0].filament = "ABS" || move.extruders[0].filament = "ASA" || move.extruders[0].filament = "PC"
+  set global.ventilateChamber = 30 ; set exhaust timer to 15min
 
 ; enable daemon
 set global.RunDaemon = true

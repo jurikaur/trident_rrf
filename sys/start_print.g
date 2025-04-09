@@ -32,10 +32,9 @@ else
  
 M98 P"0:/macros/Air filtration/Air filtration 25%"                          ; turn on air filtration fan to 25%
 
-M106 P2 S0.6                                                                ; start bed fans to help heat chamber
-
 if param.B = "ABS" || param.B = "ASA" || param.B = "PC"
 	if !global.soakTimeOverride & global.soakTime != 0                        ; check whether the chamber temperature soak time should be overriden
+	    M106 P2 S0.6                                                                ; start bed fans to help heat chamber
 		M98 P"start_after_delay.g" S{global.soakTime}							; chamber Soak
 
 if global.Cancelled = true                                                  ; allows print to be cancelled at this point
