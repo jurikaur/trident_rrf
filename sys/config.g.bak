@@ -62,7 +62,7 @@ M558 P11 C"120.i2c.ldc1612" F18000 T18000    ; configure SZP as probe 1, type 11
 M308 A"SZP coil" S10 Y"thermistor" P"120.temp0" ; thermistor on SZP coil
 G31 Z2 Y0 X-24.5                                 ; define probe 1 offsets and trigger height
 M558.2 K0 S16 R136744                           ; set drive current and reading offset
-M557 X30:290 Y15:290 S10                      ; define mesh grid
+M557 X10:270 Y15:290 P10                      ; define mesh grid
 M671 X-50:150:350 Y18:348:18 S5              ; front left, back, front right
 
 ; Endstops

@@ -25,7 +25,7 @@ M950 E0 C"led" T0 ; configure LED strip #0
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
 M569 P0.2 S1 D2 ; driver 0.2 goes forwards (Y axis)
-M569 P0.5 S0 D2 ; driver 0.5 goes backwards (extruder 0)
+M569 P0.5 S1 D2 ; driver 0.5 goes forwards (extruder 0)
 M569 P1.0 S1 D2 ; driver 1.0 goes forwards (Z axis)
 M569 P1.1 S1 D2 ; driver 1.1 goes forwards (Z axis)
 M569 P1.2 S0 D2 ; driver 1.2 goes backwards (Z axis)

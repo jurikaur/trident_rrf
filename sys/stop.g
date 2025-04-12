@@ -7,14 +7,14 @@ G91 ; relative positioning
 G1 Z{var.probe_height} F2400 ; move nozzle relative to position
 G90 ; absolute positioning
 
-M106 P0 S0 ; layer fan off
+M106 P1 S0 ; layer fan off
 M220 S100 ; reset speed factor to 100%
 M221 D0 S100 ; reset extruder factor to 100%
 
 G1 E-2 F3600 ; retract 2mm
 
 ;M98 P"/sys/lib/purge-bucket.g" ; move to purge bucket position
-G1 X150 Y200 Z269 ; park nozzle X150 Y100 to allow next sensorless homing to have some speed for stall detection
+G1 X150 Y200 Z250 ; park nozzle X150 Y100 to allow next sensorless homing to have some speed for stall detection
 
 G1 E2 F3600 ; unretract previous amount before ramming
 G1 E1 F400  ; unretract 1mm

@@ -68,5 +68,4 @@ else
 	M568 P0 S{global.slicerHotendTempOverride} A2							    ; set hotend temperature to the override temperature set in btncmd instead
 M116 P0                                                                     ; wait for this temperature to be reached
 
-G1 E40 F600                                                                  ;rePrime hotend
 M98 P"Nozzle-clean.g"														; clean nozzle
