@@ -8,18 +8,15 @@ if exists(global.z_probe_height)
 G1 X150 Y150
 M913 Z50 ;lower motor current to 50%
 
-M18 Z ; Disable Z motors
-M17 Z ; Enable Z motors
+;M18 Z ; Disable Z motors
+;M17 Z ; Enable Z motors
 ;G4 P150 ; Wait
 
 ; do rough home
 M98 P"0:/sys/rough-homez.g"
-G4 P150 ;wait a bit
 
 ;touch probe
-;M308 A"SZP coil" S10 Y"thermistor" P"120.temp0"
 M558 P11 C"120.i2c.ldc1612" F100:100:18000 T18000 H3:3 R0.75
-G4 P150 ;wait
 G31 Z3 Y0 Z-24.5
 M558.2 K0 S20 R144315
 M558.3 K0 S1 F200 V1.0
