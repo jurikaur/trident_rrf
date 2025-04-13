@@ -13,6 +13,9 @@ if !exists(global.sb_leds)
 if !exists(global.z_probe_height)
   global z_probe_height = 25 ; z probe height for safe attach/detach probe
 
+if !exists(global.z_rough_home)
+  global z_rough_home = true ; z probe height for safe attach/detach probe
+
 if !exists(global.slicerBedTemp)											; checks for the existence of global.slicerBedTemp
 	global slicerBedTemp = 0												; if it doesn't exist, set the value to 0
 if !exists(global.slicerBedTempOverride)									; checks for the existence of global.slicerBedTempOverride

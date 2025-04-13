@@ -25,7 +25,7 @@ M950 E0 C"led" T0 ; configure LED strip #0
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
 M569 P0.2 S1 D2 ; driver 0.2 goes forwards (Y axis)
-M569 P0.5 S0 D2 ; driver 0.5 goes backwards (extruder 0)
+M569 P0.5 S1 D2 ; driver 0.5 goes forwards (extruder 0)
 M569 P1.0 S1 D2 ; driver 1.0 goes forwards (Z axis)
 M569 P1.1 S1 D2 ; driver 1.1 goes forwards (Z axis)
 M569 P1.2 S0 D2 ; driver 1.2 goes backwards (Z axis)
@@ -58,7 +58,7 @@ M669 K1 ; configure CoreXY kinematics
 
 ; Probes
 ; Scanning Z probe
-M558 P11 C"120.i2c.ldc1612" F18000 T18000    ; configure SZP as probe 1, type 11, on CAN address 120
+M558 P11 C"120.i2c.ldc1612" F300:120 T12000 A3 S0.02   ; configure SZP as probe 1, type 11, on CAN address 120
 M308 A"SZP coil" S10 Y"thermistor" P"120.temp0" ; thermistor on SZP coil
 G31 Z2 Y0 X-24.5                                 ; define probe 1 offsets and trigger height
 M558.2 K0 S16 R136744                           ; set drive current and reading offset

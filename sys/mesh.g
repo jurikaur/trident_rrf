@@ -8,10 +8,7 @@ if exists(global.z_probe_height)
   set var.probe_height = global.z_probe_height 
 
 G90
-;G1 X0 Y0 F30000
 G29 S2 ; Disable mesh bed compensation and clear the height map
-G31 K0 Z3 Y0 X-24.5
-;M557 X45:287 Y15:280 P10
 M557 X10:270 Y15:290 P10
 M558.1 K0 S0.3 ; calibrate szp
 G1 Z5
