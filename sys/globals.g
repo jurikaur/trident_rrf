@@ -37,7 +37,7 @@ if !exists(global.overrideHotendOff)										; checks for the existence of glob
 if !exists(global.nozzleDiameterInstalled)									; checks for the existence of global.nozzleDiameterInstalled
 	global nozzleDiameterInstalled = 0.4									; if it doesn't exist, set the value to 0.4mm, which is the default for the Troodon V2
 if !exists(global.nozzleProbeTemperature)									; checks for the existence of global.nozzleProbeTemperature
-	global nozzleProbeTemperature = 175										; if it doesn't exist, set the value to 175 degrees
+	global nozzleProbeTemperature = 150										; if it doesn't exist, set the value to 175 degrees
 if !exists(global.Cancelled)												; checks for the existence of global.Cancelled
 	global Cancelled = false												; if it doesn't exist, set the value to false
 if !exists(global.useAutoZ)													; checks for the existence of global.useAutoZ

@@ -13,20 +13,20 @@ M221 D0 S100 ; reset extruder factor to 100%
 
 G1 E-2 F3600 ; retract 2mm
 
-;M98 P"/sys/lib/purge-bucket.g" ; move to purge bucket position
-G1 X150 Y200 Z250 ; park nozzle X150 Y100 to allow next sensorless homing to have some speed for stall detection
-
 G1 E2 F3600 ; unretract previous amount before ramming
 G1 E1 F400  ; unretract 1mm
-;G1 E-5 F3600 ; retract 15mm to clear meltzone
 M400 ; wait for moves to finish
 
 G10 P0 S-273.1 R-273.1 ; turn off T0 toolhead
-;G10 P1 S-273.1 R-273.1 ; turn off T0 toolhead
-;G10 P2 S-273.1 R-273.1 ; turn off T0 toolhead
 M144 ; bed standby
 M140 S-273.1 ; turn off bed heater
 G92 E0 ; reset extrusion position
+
+;G4 P300000 ; let nozzle cool for 5 minutes
+;M98 P"Nozzle-clean.g" ; brush nozzle last time
+
+G1 X150 Y200 Z250 ; park nozzle X150 Y100 to allow next sensorless homing to have some speed for stall detection
+
 M84 ; stop all motors
 M141 S-273.1 ; turn off chamber heater
 M42 P0 S0

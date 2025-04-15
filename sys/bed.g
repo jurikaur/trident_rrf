@@ -18,18 +18,18 @@ M913 Z50 ;lower motor current to 50%
 M561
 
 G30 P0 X25 Y30 Z-99999
-G30 P1 X150 Y280 Z-99999
+G30 P1 X150 Y270 Z-99999
 G30 P2 X270 Y30 Z-99999 S3
 echo "Current rough pass deviation: " ^ move.calibration.initial.deviation
 
-M558 H3:3 ; set dive height to 3mm
+M558 H5:5 ; set dive height to 3mm
 while move.calibration.initial.deviation > 0.005
   if iterations >= 8
     echo "Error: Max attemps failed. Deviation: " ^ move.calibration.initial.deviation
     break
   echo "Deviation over threshold. Executing pass" , iterations+2, "deviation", move.calibration.initial.deviation
   G30 P0 X25 Y30 Z-99999
-  G30 P1 X150 Y280 Z-99999
+  G30 P1 X150 Y270 Z-99999
   G30 P2 X270 Y30 Z-99999 S3
   echo "Current deviation: " ^ move.calibration.initial.deviation
   continue

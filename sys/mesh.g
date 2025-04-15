@@ -11,6 +11,7 @@ G90
 G29 S2 ; Disable mesh bed compensation and clear the height map
 M557 X10:270 Y15:290 P10
 M558.1 K0 S0.3 ; calibrate szp
+M558 F6000
 G1 Z5
 G29 S0 K0; Probe the bed, save the height map in a file on the SD card, and activate mesh bed compensation
 if result != 0
