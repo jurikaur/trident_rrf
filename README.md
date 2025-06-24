@@ -1,23 +1,27 @@
-# Voron Trident SN:1011
+# Custom CoreXY printer started as Voron Trident SN:1011
 
 
 ## Hardware
 (Hardware is self sourced mainly from lecktor.com)
-- LDO 300x300 frame
-- MGN9 linear rails LDO
+- custom 300x300x250 frame
+- MGN9 linear rails
 - MGN12 linear rail DHM pro(100Cr6-medium preload)
-- Z-steppers - LDO-42STH40-1684L300E(1.8)
-- A & B steppers - LDO-42STH48-2004MAH(0.9)
-- [Galileo2 extruder](https://github.com/JaredC01/Galileo2)
+- Z-steppers - Vantai
+- A & B steppers - Moons
+- [Sherpa Mini extruder](https://github.com/Annex-Engineering/Sherpa_Mini-Extruder)
 
 ## Electronics
-- Duet 3 Mini 5+ Ethernet v1.02a
+- Duet 3 MB6HC for A+B motors(awd 48V)
+- Duet 3 MB3HC for Z motors(24V)
 - Duet 3 Toolboard 1LC v1.2a
 - Duet3D PanelDue Integrated 5'' v1.0
+- Duet 3 SZP bed probe
 - A-Senco SSR-500-1DA48-10
-- 24V PSU LRS-200-24
+- 24V PSU UHP-200-24
+- 48V PSU UHP-200-48
 - 5V PSU LRS-35-5
 - Keenovo heater for 300x300 bed
+- Duet 3 MFM
 
 ## Mods
 - [XOL toolhead](https://github.com/Armchair-Engineering/Xol-Toolhead)
