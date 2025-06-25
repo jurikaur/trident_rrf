@@ -19,54 +19,55 @@ set global.RunDaemon = false                                                ; di
 M141 S-273.1                                                                ; turn off fake chamber heater
 
 if global.nozzleDiameterInstalled != param.D                                ; this checks the gcode to ensure it matches the nozzle size installed in the printer
-	abort "This gcode is for a different nozzle diameter"                     ; abort the gcode as the nozzle size doesn't match
+    abort "This gcode is for a different nozzle diameter"                   ; abort the gcode as the nozzle size doesn't match
 
-;M98 P"0:/macros/LED/LED 100%"                                               ; turn on the LED
+M98 P"0:/macros/Chamber led/led-60%"                                        ; turn on the LED
 
 G28                                                                         ; Home cold printer to raise bed
 
-if global.slicerBedTempOverride == 0										; check whether the bed temperature should be overriden
-	M190 S{param.A}															; set Bed Temperature to whatever is set in slicer
+if global.slicerBedTempOverride == 0                                        ; check whether the bed temperature should be overriden
+    M190 S{param.A}                                                         ; set Bed Temperature to whatever is set in slicer
 else
-	M190 S{global.slicerBedTempOverride}										; set bed temperature to the override temperature set in btncmd instead
+    M190 S{global.slicerBedTempOverride}                                    ; set bed temperature to the override temperature set in btncmd instead
  
 M98 P"0:/macros/Air filtration/Air filtration 25%"                          ; turn on air filtration fan to 25%
 
 if param.B = "ABS" || param.B = "ASA" || param.B = "PC"
-	if !global.soakTimeOverride & global.soakTime != 0                        ; check whether the chamber temperature soak time should be overriden
-		M98 P"0:/macros/Bed Fans/Bed Fan ON"                                ; start bed fans to help heat chamber
-		M98 P"start_after_delay.g" S{global.soakTime}							; chamber Soak
+    M98 P"0:/macros/Air filtration/Air filtration 100%"                     ; turn on air filtration fan to 100%
+    if !global.soakTimeOverride & global.soakTime != 0                      ; check whether the chamber temperature soak time should be overriden
+        M98 P"0:/macros/Bed Fans/Bed Fan ON"                                ; start bed fans to help heat chamber
+        M98 P"start_after_delay.g" S{global.soakTime}                       ; chamber Soak
 
 if global.Cancelled = true                                                  ; allows print to be cancelled at this point
-	M291 P"Print has been cancelled" S0 T3
-		G4 S3
-		abort "Print cancelled."
-else  
-	G28                                                                       ; home the printer
+    M291 P"Print has been cancelled" S0 T3
+    G4 S3
+    abort "Print cancelled."
+else
+    M98 P"Nozzle-clean.g"                                                   ; clean nozzle  
+    ;G28                                                                     ; home the printer
 
 if global.Cancelled = true                                                  ; allows print to be cancelled at this point
-	M291 P"Print has been cancelled" S0 T3
-	G4 S3
-	abort "Print cancelled."
+    M291 P"Print has been cancelled" S0 T3
+    G4 S3
+    abort "Print cancelled."
 else  
-	G32                                                                       ; level the gantry
-	M98 P"Nozzle-clean.g"														; clean nozzle
-	if global.useAutoZ = true													; check for use AutoZ
-		M98 P"AutoZ.g"															; use AutoZ to set Z height
+    M98 P"Nozzle-clean.g"                                                   ; clean nozzle
+    G32                                                                     ; level the gantry
+    if global.useAutoZ = true                                               ; check for use AutoZ
+        M98 P"AutoZ.g"                                                      ; use AutoZ to set Z height
 
-if global.generateMesh = true												; check whether new mesh height map should be generated
-	if global.generatePrintOnlyMesh = true
-		M98 P"print_area_mesh.g" A{param.E} B{param.F} C{param.H} D{param.J}
-	else
-		G29																		; generate mesh height map
+if global.generateMesh = true                                               ; check whether new mesh height map should be generated
+    if global.generatePrintOnlyMesh = true
+        M98 P"print_area_mesh.g" A{param.E} B{param.F} C{param.H} D{param.J}
+    else
+        G29                                                                 ; generate mesh height map
 else
-	G29 S1                                                                    ; load the height map
+    G29 S1                                                                  ; load the height map
 
-if global.slicerHotendTempOverride == 0										; check whether the hotend temperature should be overriden
-	M568 P0 S{param.C} A2		                                                ; set hotend Temperature to whatever is set in slicer
+if global.slicerHotendTempOverride == 0                                     ; check whether the hotend temperature should be overriden
+    M568 P0 S{param.C} A2                                                   ; set hotend Temperature to whatever is set in slicer
 else
-	M568 P0 S{global.slicerHotendTempOverride} A2							    ; set hotend temperature to the override temperature set in btncmd instead
+    M568 P0 S{global.slicerHotendTempOverride} A2                           ; set hotend temperature to the override temperature set in btncmd instead
 M116 P0                                                                     ; wait for this temperature to be reached
-
-G1 E40 F600                                                                  ;rePrime hotend
-M98 P"Nozzle-clean.g"														; clean nozzle
+M98 P"0:/macros/Chamber led/led-40%"                                        ; turn chamber leds to 40%
+;M98 P"Nozzle-clean.g"                                                       ; clean nozzle

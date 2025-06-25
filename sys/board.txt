@@ -1,7 +1,0 @@
-//Config for Fly-Super8Pro H723
-
-wifi.moduleType = esp32eth
-
-stepper.DriverType = {TMC2240, TMC2240, TMC2240, TMC2240, TMC2240, TMC2240, TMC2240, TMC2240}
-
-accelerometer.spiChannel = 3

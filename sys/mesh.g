@@ -8,15 +8,19 @@ if exists(global.z_probe_height)
   set var.probe_height = global.z_probe_height 
 
 G90
-G1 Z{var.probe_height} F2400
-M401 ; Deploy probe
+M557 X10:270 Y15:290 P10
 G29 S2 ; Disable mesh bed compensation and clear the height map
-G29 S0 ; Probe the bed, save the height map in a file on the SD card, and activate mesh bed compensation
+G28 Z ; home Z
+G1 Z6 ; go to Z5
+M558.1 K0 S1.7 ; calibrate szp
+M558 F12000
+G1 Z6
+
+G29 S0 K0; Probe the bed, save the height map in a file on the SD card, and activate mesh bed compensation
 if result != 0
   abort "Mesh probing failed"
 
 G1 Z{var.probe_height} F2400
-M402 ; Retract probe
 
 ; LED status
 if exists(global.sb_leds)

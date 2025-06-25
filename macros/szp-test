@@ -1,0 +1,8 @@
+M98 P"0:/sys/szp_mode_touch.g"
+G1 Z3
+while true
+    if iterations < 19
+        G30 K0 p{iterations} X150 Y150 Z-99999
+    else
+        G30 K0 p{iterations} X150 Y150 Z-99999 s-1
+        break

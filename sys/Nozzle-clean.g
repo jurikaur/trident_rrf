@@ -15,7 +15,7 @@ G1 Y290 F7000                                                   ; avoid hitting 
 G1 X220 F7000
 G1 Y302 F7000
 
-G1 Z2 F3000                                                     ; lower z
+G1 Z4 F3000                                                     ; lower z
 G1 X260 F10000                                                  ; clean the nozzle
 G1 X220 F10000                                                  ; clean the nozzle
 G1 X260 F10000                                                  ; clean the nozzle

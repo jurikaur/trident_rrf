@@ -24,10 +24,8 @@ M950 E0 C"led" T0 ; configure LED strip #0
 
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
-M569 P0.1 S1 D2 ; driver 0.1 goes forwards (X axis)
 M569 P0.2 S1 D2 ; driver 0.2 goes forwards (Y axis)
-M569 P0.3 S1 D2 ; driver 0.3 goes forwards (Y axis)
-M569 P0.5 S0 D2 ; driver 0.5 goes backwards (extruder 0)
+M569 P0.5 S1 D2 ; driver 0.5 goes forwards (extruder 0)
 M569 P1.0 S1 D2 ; driver 1.0 goes forwards (Z axis)
 M569 P1.1 S1 D2 ; driver 1.1 goes forwards (Z axis)
 M569 P1.2 S0 D2 ; driver 1.2 goes backwards (Z axis)
@@ -37,21 +35,20 @@ M906 I30 ; set motor current idle factor
 M84 S30 ; set motor current idle timeout
 
 ; Axes
-M584 X0.0:0.1 Y0.2:0.3 Z1.0:1.1:1.2 ; set axis mapping
-;M584 X0.1 Y0.3 Z1.0:1.1:1.2 ; set axis mapping
+M584 X0.0 Y0.2 Z1.0:1.1:1.2 ; set axis mapping
 M350 X32 Y32 Z16 I1 ; configure microstepping with interpolation
 M906 X1700 Y1700 Z1000 ; set axis driver currents
 M92 X160 Y160 Z400 ; configure steps per mm
-M208 X16:297 Y2:308 Z0:269 ; set minimum and maximum axis limits
-M566 X900 Y900 Z12 ; set maximum instantaneous speed changes (mm/min)
+M208 X3:299 Y0:310 Z0:250 ; set minimum and maximum axis limits
+M566 X600 Y600 Z12 ; set maximum instantaneous speed changes (mm/min)
 M203 X27000 Y27000 Z720 ; set maximum speeds (mm/min)
 M201 X20000 Y20000 Z150 ; set accelerations (mm/s^2)
 
 ; Extruders
-M584 E0.5 ; set extruder mapping
+M584 E121.0 ; set extruder mapping
 M350 E16 I1 ; configure microstepping with interpolation
-M906 E800 ; set extruder driver currents
-M92 E682 ; configure steps per mm
+M906 E600 ; set extruder driver currents
+M92 E712 ; configure steps per mm
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
 M201 E3000 ; set accelerations (mm/s^2)
@@ -60,27 +57,29 @@ M201 E3000 ; set accelerations (mm/s^2)
 M669 K1 ; configure CoreXY kinematics
 
 ; Probes
-M558 P8 C"io4.in" H2 F600:180 T18000 A10 S0.01  ; set Z probe type to switch and the dive height + speeds
-G31 P500 X-5 Y28 Z13                          ; set Z probe trigger value, offset and trigger height
-M557 X16:296 Y31:285 P5                      ; define mesh grid
+; Scanning Z probe
+M558 P11 C"120.i2c.ldc1612" F300:120 T12000 A3 S0.02   ; configure SZP as probe 1, type 11, on CAN address 120
+M308 A"SZP coil" S10 Y"thermistor" P"120.temp0" ; thermistor on SZP coil
+G31 Z3.1 Y0 X-24.5                                 ; define probe 1 offsets and trigger height
+M98 P"szp_mode_normal.g"
+M557 X10:270 Y15:290 P10                      ; define mesh grid
 M671 X-50:150:350 Y18:348:18 S5              ; front left, back, front right
 
 ; Endstops
-M574 X2 P"io1.in" S1 ; configure X axis endstop
+M574 X2 P"121.io2.in" S1 ; configure X axis endstop
 M574 Y2 P"io2.in" S1 ; configure Y axis endstop
 M574 Z0 ; configure Z axis endstop
-;M574 Z1 P"io3.in" S1 ; configure Z axis endstop
 
 ; Sensors
 M308 S0 P"temp0" Y"thermistor" A"Heated Bed" T100000 B4725 C7.06e-8 ; configure sensor #0
-M308 S1 P"temp1" Y"pt1000" A"Nozzle" ; configure sensor #1
+M308 S1 P"121.temp0" Y"pt1000" A"Nozzle" ; configure sensor #1
 M308 S2 P"temp2" Y"thermistor" A"Chamber" T100000 B4725 C7.06e-8 ; configure sensor #2
 
 ; Heaters
 M950 H0 C"out1" T0 ; create heater #0
 M143 H0 P0 T0 C0 S125 A0 ; configure heater monitor #0 for heater #0
 M307 H0 B0 S1.00 ; configure model of heater #0
-M950 H1 C"out2" T1 ; create heater #1
+M950 H1 C"121.out0" T1 ; create heater #1
 M143 H1 P0 T1 C0 S350 A0 ; configure heater monitor #0 for heater #1
 M307 H1 B0 S1.00 ; configure model of heater #1
 M950 H2 C"out3" T2 ; create heater #2
@@ -94,9 +93,9 @@ M140 P0 H0 ; configure heated bed #0
 M141 P0 H2 ; configure heated chamber #0
 
 ; Fans
-M950 F0 C"out4+out4.tach" ; create fan #0
+M950 F0 C"121.out2+out2.tach" ; create fan #0
 M106 P0 C"HEF" S0 B0.1 H1 T45 ; configure fan #0
-M950 F1 C"out5" ; create fan #1
+M950 F1 C"121.out1" ; create fan #1
 M106 P1 C"PCF" S0 L0 X1 B0.1 ; configure fan #1
 M950 F2 C"1.out7" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
@@ -106,25 +105,32 @@ M106 P3 C"Filter" S0 L0 X1 B0.1 ; configure fan #3
 ; Camera
 M950 P0 C"out9" ; create camera
 
+;Chamber LED
+M950 P1 C"1.out4"                                  ; Create output Port0 attached to out1 connector for LED lights
+
 ; Tools
 M563 P0 S"Chube" D0 H1 F1 ; create tool #0
 M568 P0 R0 S0               ; set initial tool #0 active and standby temperatures to 0C
 
 ; Miscellaneous
 T0 ; select first tool
-M556 S100 X-0.056 ; fix skew
-M593 P"mzv" F71 ; dampen resonances
+M556 S100 X0.07 ; fix skew
+M593 P"mzv" F61 ; dampen resonances
 
-M955 P0 C"spi.cs1+spi.cs0" I25; all wires connected to temp DB connector, no temperature daughterboard
+M955 P120.0 I01
+;M955 P0 C"spi.cs1+spi.cs0" I25; all wires connected to temp DB connector, no temperature daughterboard
 
 ; Custom settings
 M501
 
 ; orbiter smart filament sensor
-M950 J1 C"io5.in"                            ; define logical input for filament auto load
-M581 P1 T3 S1 R0                             ; define trigger for filament auto load triggers trigger3.g
-M581 P1 T2 S0 R0                             ; define trigger for filament sensing triggers trigger2.g
-M950 J2 C"^io6.in"                           ; define logical input for filament unload
-M581 P2 T4 S1 R0                             ; define trigger for filament auto unload triggers trigger4.g
+;M950 J1 C"io5.in"                            ; define logical input for filament auto load
+;M581 P1 T3 S1 R0                             ; define trigger for filament auto load triggers trigger3.g
+;M581 P1 T2 S0 R0                             ; define trigger for filament sensing triggers trigger2.g
+;M950 J2 C"^io6.in"                           ; define logical input for filament unload
+;M581 P2 T4 S1 R0                             ; define trigger for filament auto unload triggers trigger4.g
+
+; duet MFM
+M591 D0 P3 C"121.io1.in" S0                       ; define duet MFM sensor 
 
 M98 P"globals.g"                             ; Load Global variables
