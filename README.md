@@ -24,10 +24,13 @@
 - Duet 3 MFM
 
 ## Mods
-- [XOL toolhead](https://github.com/Armchair-Engineering/Xol-Toolhead)
-- [PCB Klicky probe](https://github.com/tanaes/whopping_Voron_mods/tree/main/pcb_klicky)
-- [Bump dock for klicky](https://github.com/DW-Tas/Klicky-00/blob/main/instructions.md#bump-dock)
-- [Pins mod](https://github.com/VoronDesign/VoronUsers/tree/master/printer_mods/hartk1213/Voron2.4_Trident_Pins_Mod)
-- [BFI idlers](https://github.com/clee/VoronBFI/tree/main)
+- [Monolith Gantry(Sheet metal AWD](https://github.com/CloakedWayne/Monolith_Gantry_V2-VT/tree/main)
+- [Annex K3 belted Z-drive](https://github.com/Annex-Engineering/Gasherbrum-K3)
+- [Carbonara CF X-tube](https://www.printables.com/model/1327701-carbonara-lightweight-cf-tube)
+- [Takeoff toolhead](https://github.com/Kizime123/Takeoff-Toolhead)
+- [Chube Air 100W](https://chubehotend.com/)
 
 ![Drive map](/images/Drive_maping.PNG)
+
+## Details
+EPDM 9mm A+B belts, tightened to 217Hz, Reprapfirmware
