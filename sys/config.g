@@ -24,8 +24,9 @@ M950 E0 C"led" T0 ; configure LED strip #0
 
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
+M569 P0.1 S1 D2 ; driver 0.1 goes forwards (X axis)
 M569 P0.2 S1 D2 ; driver 0.2 goes forwards (Y axis)
-M569 P0.5 S1 D2 ; driver 0.5 goes forwards (extruder 0)
+M569 P0.3 S1 D2 ; driver 0.3 goes forwards (Y axis)
 M569 P1.0 S1 D2 ; driver 1.0 goes forwards (Z axis)
 M569 P1.1 S1 D2 ; driver 1.1 goes forwards (Z axis)
 M569 P1.2 S0 D2 ; driver 1.2 goes backwards (Z axis)
@@ -35,20 +36,20 @@ M906 I30 ; set motor current idle factor
 M84 S30 ; set motor current idle timeout
 
 ; Axes
-M584 X0.0 Y0.2 Z1.0:1.1:1.2 ; set axis mapping
+M584 X0.0:0.1 Y0.2:0.3 Z1.0:1.1:1.2 ; set axis mapping
 M350 X32 Y32 Z16 I1 ; configure microstepping with interpolation
 M906 X1700 Y1700 Z1000 ; set axis driver currents
 M92 X160 Y160 Z400 ; configure steps per mm
-M208 X3:299 Y0:310 Z0:250 ; set minimum and maximum axis limits
-M566 X600 Y600 Z12 ; set maximum instantaneous speed changes (mm/min)
+M208 X3:299 Y25:310 Z0:250 ; set minimum and maximum axis limits
+M566 X420 Y420 Z12 ; set maximum instantaneous speed changes (mm/min)
 M203 X27000 Y27000 Z720 ; set maximum speeds (mm/min)
 M201 X20000 Y20000 Z150 ; set accelerations (mm/s^2)
 
 ; Extruders
 M584 E121.0 ; set extruder mapping
 M350 E16 I1 ; configure microstepping with interpolation
-M906 E600 ; set extruder driver currents
-M92 E712 ; configure steps per mm
+M906 E650 ; set extruder driver currents
+M92 E682 ; configure steps per mm
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
 M201 E3000 ; set accelerations (mm/s^2)
@@ -114,8 +115,8 @@ M568 P0 R0 S0               ; set initial tool #0 active and standby temperature
 
 ; Miscellaneous
 T0 ; select first tool
-M556 S100 X0.07 ; fix skew
-M593 P"mzv" F61 ; dampen resonances
+M556 S100 X-0.03 Y-0.18 Z0.14 ; fix skew
+M593 P"mzv" F59 ; dampen resonances
 
 M955 P120.0 I01
 ;M955 P0 C"spi.cs1+spi.cs0" I25; all wires connected to temp DB connector, no temperature daughterboard
@@ -131,6 +132,9 @@ M501
 ;M581 P2 T4 S1 R0                             ; define trigger for filament auto unload triggers trigger4.g
 
 ; duet MFM
-M591 D0 P3 C"121.io1.in" S0                       ; define duet MFM sensor 
+M591 D0 P3 C"121.io1.in" S1 E10 R40:160                     ; define duet MFM sensor 
+
+;Tapper out bed compensation H ... mm 
+M376 H1
 
 M98 P"globals.g"                             ; Load Global variables
