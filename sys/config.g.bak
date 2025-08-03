@@ -44,12 +44,13 @@ M208 X3:299 Y25:310 Z0:250 ; set minimum and maximum axis limits
 M566 X420 Y420 Z12 ; set maximum instantaneous speed changes (mm/min)
 M203 X27000 Y27000 Z720 ; set maximum speeds (mm/min)
 M201 X20000 Y20000 Z150 ; set accelerations (mm/s^2)
+M201.1 X500 Y500
 
 ; Extruders
 M584 E121.0 ; set extruder mapping
 M350 E16 I1 ; configure microstepping with interpolation
-M906 E600 ; set extruder driver currents
-M92 E712 ; configure steps per mm
+M906 E650 ; set extruder driver currents
+M92 E682 ; configure steps per mm
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
 M201 E3000 ; set accelerations (mm/s^2)
@@ -59,11 +60,11 @@ M669 K1 ; configure CoreXY kinematics
 
 ; Probes
 ; Scanning Z probe
-M558 P11 C"120.i2c.ldc1612" F300:120 T12000 A3 S0.02   ; configure SZP as probe 1, type 11, on CAN address 120
+M558 P11 C"120.i2c.ldc1612" F300:120 T6000 A3 S0.02   ; configure SZP as probe 1, type 11, on CAN address 120
 M308 A"SZP coil" S10 Y"thermistor" P"120.temp0" ; thermistor on SZP coil
-G31 Z3.1 Y0 X-24.5                                 ; define probe 1 offsets and trigger height
+G31 Z3.2 Y0 X-24.5                                 ; define probe 1 offsets and trigger height
 M98 P"szp_mode_normal.g"
-M557 X10:270 Y15:290 P10                      ; define mesh grid
+M557 X10:270 Y30:290 P10                      ; define mesh grid
 M671 X-50:150:350 Y18:348:18 S5              ; front left, back, front right
 
 ; Endstops
@@ -115,7 +116,8 @@ M568 P0 R0 S0               ; set initial tool #0 active and standby temperature
 
 ; Miscellaneous
 T0 ; select first tool
-M556 S100 X-0.03 Y-0.18 Z0.14 ; fix skew
+;M556 S100 X-0.243213 Y0.053655 Z-0.243984 ; fix skew Pass1
+M556 S100 X-0.253204 Y0.023611 Z-0.247325 ; fix skew Pass2
 M593 P"mzv" F59 ; dampen resonances
 
 M955 P120.0 I01
@@ -132,7 +134,7 @@ M501
 ;M581 P2 T4 S1 R0                             ; define trigger for filament auto unload triggers trigger4.g
 
 ; duet MFM
-M591 D0 P3 C"121.io1.in" S1 E10 R40:160                     ; define duet MFM sensor 
+M591 D0 P3 C"121.io1.in" S0 E10 R40:160                     ; define duet MFM sensor 
 
 ;Tapper out bed compensation H ... mm 
 M376 H1

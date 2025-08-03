@@ -7,7 +7,7 @@ if heat.heaters[1].current < tools[0].active[0]
     M116 P0
 
 G1 X150 Y150 F3000 ; move probe position
-M913 Z50 ;lower motor current to 50%
+M913 Z60 ;lower motor current to 60%
 
 M98 P"szp_mode_normal.g" ; SZP to normal mode
 ; do rough home
@@ -15,7 +15,7 @@ M98 P"0:/sys/rough-homez.g"
 
 ;touch probe
 M98 P"szp_mode_touch.g" ; SZP to touch mode
-M558 A2 H3:3 R0.75 ;set dive 3mm and probe recovery time
+M558 A1 H3:3 R0.75 ;set dive 3mm and probe recovery time
 G1 Z3 ; move to rough Z=3mm
 G4 P100 ; wait
 G30 ; touch

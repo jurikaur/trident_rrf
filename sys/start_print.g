@@ -7,6 +7,7 @@
 ; param.F is the first layer max X
 ; param.H is the first layer min Y
 ; param.J is the first layer max Y
+; param.K is the chamber temperature
 
 set global.Cancelled = false                                                ; reset the cancelled global value to false
 
@@ -32,11 +33,19 @@ else
  
 M98 P"0:/macros/Air filtration/Air filtration 25%"                          ; turn on air filtration fan to 25%
 
-if param.B = "ABS" || param.B = "ASA" || param.B = "PC"
+if param.B = "ABS1" || param.B = "ASA1" || param.B = "PC1"
     M98 P"0:/macros/Air filtration/Air filtration 100%"                     ; turn on air filtration fan to 100%
     if !global.soakTimeOverride & global.soakTime != 0                      ; check whether the chamber temperature soak time should be overriden
         M98 P"0:/macros/Bed Fans/Bed Fan ON"                                ; start bed fans to help heat chamber
         M98 P"start_after_delay.g" S{global.soakTime}                       ; chamber Soak
+
+if global.slicerBedTemp > 90
+  if sensors.analog[2].lastReading < {param.K}                              ; check chamber thermistor value
+    M141 S{param.K}                                                         ; turn on fake chamber heater to soak cahmber
+    M98 P"0:/macros/Bed Fans/Bed Fan ON"                                    ; turn on bed fans to heat chamber
+    M116 H2                                                                 ; wait chamber to reach min requested temp
+  M98 P"0:/macros/Bed Fans/Bed Fan ON"                                      ; set bed fans to 50% to heat chamber
+
 
 if global.Cancelled = true                                                  ; allows print to be cancelled at this point
     M291 P"Print has been cancelled" S0 T3
