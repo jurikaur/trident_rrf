@@ -10,7 +10,7 @@ if heat.heaters[1].current < tools[0].active[0]
 M564 H0                    ; unlock movement 
 G90                        ; absolute positioning
 G1 H0 X150 Y150 F10000     ; move probe to bed center
-M913 Z55                   ; 55% Z motor current to reduce damage/intensity of impact 
+M913 Z75                   ; 75% Z motor current to reduce damage/intensity of impact 
 
 ; Step 1: do a rough contact-free measurement to get *kinda close* to bed
 M98 P"szp_mode_normal.g"
