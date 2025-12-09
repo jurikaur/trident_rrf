@@ -17,7 +17,7 @@ set global.slicerHotendTemp = param.C                                       ; th
 set global.ventilateChamber = 0                                             ; chamber ventilation timer 0
 set global.RunDaemon = false                                                ; disable daemon
 
-M141 S-273.1                                                                ; turn off fake chamber heater
+;M141 S-273.1                                                                ; turn off fake chamber heater
 
 if global.nozzleDiameterInstalled != param.D                                ; this checks the gcode to ensure it matches the nozzle size installed in the printer
     abort "This gcode is for a different nozzle diameter"                   ; abort the gcode as the nozzle size doesn't match
@@ -31,29 +31,13 @@ if global.slicerBedTempOverride == 0                                        ; ch
 else
     M190 S{global.slicerBedTempOverride}                                    ; set bed temperature to the override temperature set in btncmd instead
  
-M98 P"0:/macros/Air filtration/Air filtration 25%"                          ; turn on air filtration fan to 25%
+;M98 P"0:/macros/Air filtration/Air filtration 25%"                          ; turn on air filtration fan to 25%
 
-if param.B = "ABS1" || param.B = "ASA1" || param.B = "PC1"
-    M98 P"0:/macros/Air filtration/Air filtration 100%"                     ; turn on air filtration fan to 100%
-    if !global.soakTimeOverride & global.soakTime != 0                      ; check whether the chamber temperature soak time should be overriden
-        M98 P"0:/macros/Bed Fans/Bed Fan ON"                                ; start bed fans to help heat chamber
-        M98 P"start_after_delay.g" S{global.soakTime}                       ; chamber Soak
-
-if global.slicerBedTemp > 90
-  if sensors.analog[2].lastReading < {param.K}                              ; check chamber thermistor value
+if param.K > 0
+;  if sensors.analog[2].lastReading < {param.K}                              ; check chamber thermistor value
+    M106 P4 S1
     M141 S{param.K}                                                         ; turn on fake chamber heater to soak cahmber
-    M98 P"0:/macros/Bed Fans/Bed Fan ON"                                    ; turn on bed fans to heat chamber
     M116 H2                                                                 ; wait chamber to reach min requested temp
-  M98 P"0:/macros/Bed Fans/Bed Fan ON"                                      ; set bed fans to 50% to heat chamber
-
-
-if global.Cancelled = true                                                  ; allows print to be cancelled at this point
-    M291 P"Print has been cancelled" S0 T3
-    G4 S3
-    abort "Print cancelled."
-else
-    M98 P"Nozzle-clean.g"                                                   ; clean nozzle  
-    ;G28                                                                     ; home the printer
 
 if global.Cancelled = true                                                  ; allows print to be cancelled at this point
     M291 P"Print has been cancelled" S0 T3

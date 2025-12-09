@@ -19,9 +19,6 @@ M586 P1 S1 ; configure FTP
 ; Wait a moment for the CAN expansion boards to become available
 G4 S2
 
-; LED Strips
-M950 E0 C"led" T0 ; configure LED strip #0
-
 ; Smart Drivers
 M569 P0.0 S1 D2 ; driver 0.0 goes forwards (X axis)
 M569 P0.1 S1 D2 ; driver 0.1 goes forwards (X axis)
@@ -38,18 +35,18 @@ M84 S30 ; set motor current idle timeout
 ; Axes
 M584 X0.0:0.1 Y0.2:0.3 Z1.0:1.1:1.2 ; set axis mapping
 M350 X32 Y32 Z16 I1 ; configure microstepping with interpolation
-M906 X1700 Y1700 Z1000 ; set axis driver currents
+M906 X2100 Y2100 Z1000 ; set axis driver currents
 M92 X160 Y160 Z400 ; configure steps per mm
 M208 X3:299 Y25:310 Z0:250 ; set minimum and maximum axis limits
-M566 X420 Y420 Z12 ; set maximum instantaneous speed changes (mm/min)
-M203 X27000 Y27000 Z720 ; set maximum speeds (mm/min)
-M201 X20000 Y20000 Z150 ; set accelerations (mm/s^2)
-M201.1 X500 Y500
+M566 X1500 Y1500 Z24 ; set maximum instantaneous speed changes (mm/min)
+M203 X27000 Y27000 Z2400 ; set maximum speeds (mm/min)
+M201 X20000 Y20000 Z500 ; set accelerations (mm/s^2)
+M201.1 X500 Y500 Z240
 
 ; Extruders
 M584 E121.0 ; set extruder mapping
 M350 E16 I1 ; configure microstepping with interpolation
-M906 E650 ; set extruder driver currents
+M906 E650 I10 ; set extruder driver currents
 M92 E682 ; configure steps per mm
 M566 E300 ; set maximum instantaneous speed changes (mm/min)
 M203 E7200 ; set maximum speeds (mm/min)
@@ -60,11 +57,11 @@ M669 K1 ; configure CoreXY kinematics
 
 ; Probes
 ; Scanning Z probe
-M558 P11 C"120.i2c.ldc1612" F300:120 T6000 S0.02 R0.75  ; configure SZP as probe 1, type 11, on CAN address 120; A - probe recovery time 0.75ms
+M558 P11 C"120.i2c.ldc1612" F1200:900 T36000 S0.02 R0.75; configure SZP as probe 1, type 11, on CAN address 120; A - probe recovery time 0.75ms
 M308 A"SZP coil" S10 Y"thermistor" P"120.temp0" ; thermistor on SZP coil
-G31 Z3.2 Y0 X-24.5                                 ; define probe 1 offsets and trigger height
+G31 Y0 X-24.5 Z3.2 S30 T0.002 H10 ; define probe 0 offsets and trigger height. Z3.15 - Z offset, T0.002 - probe deviation mm/C, S25 - probe calibration temp, H10 - probe therm
 M98 P"szp_mode_normal.g"
-M557 X10:270 Y30:290 P10                      ; define mesh grid
+M557 X15:270 Y30:275 P20                      ; define mesh grid
 M671 X-50:150:350 Y18:348:18 S5              ; front left, back, front right
 
 ; Endstops
@@ -84,8 +81,8 @@ M307 H0 B0 S1.00 ; configure model of heater #0
 M950 H1 C"121.out0" T1 ; create heater #1
 M143 H1 P0 T1 C0 S350 A0 ; configure heater monitor #0 for heater #1
 M307 H1 B0 S1.00 ; configure model of heater #1
-M950 H2 C"out3" T2 ; create heater #2
-M143 H2 P0 T2 C0 S75 A2 ; configure heater monitor #0 for heater #2
+M950 H2 C"out2" T2 ; create heater #2
+M143 H2 P0 T2 C0 S85 A2 ; configure heater monitor #0 for heater #2
 M307 H2 B1 S1.00 ; configure model of heater #2
 
 ; Heated beds
@@ -101,8 +98,10 @@ M950 F1 C"121.out1" ; create fan #1
 M106 P1 C"PCF" S0 L0 X1 B0.1 ; configure fan #1
 M950 F2 C"1.out7" ; create fan #2
 M106 P2 C"BEDF_12V" S0 L0 X1 B0.1 ; configure fan #2
-M950 F3 C"1.out5" ; create fan #3
+M950 F3 C"1.out6" ; create fan #3
 M106 P3 C"Filter" S0 L0 X1 B0.1 ; configure fan #3
+M950 F4 C"1.out5" ; create fan4
+M106 P4 C"Chamber" S0 B0.1 ;H2 T20 ; configure fan #4. Start Chamber heater fan from 30C
 
 ; Camera
 M950 P0 C"out9" ; create camera
@@ -116,9 +115,9 @@ M568 P0 R0 S0               ; set initial tool #0 active and standby temperature
 
 ; Miscellaneous
 T0 ; select first tool
-;M556 S100 X-0.243213 Y0.053655 Z-0.243984 ; fix skew Pass1
-M556 S100 X-0.253204 Y0.023611 Z-0.247325 ; fix skew Pass2
-M593 P"mzv" F59 ; dampen resonances
+M556 S100 X-0.223095 Y0.033663 Z-0.197079 ; fix skew Pass1
+;M556 S100 X-0.253204 Y0.023611 Z-0.247325 ; fix skew Pass2
+M593 P"mzv" F79 ; dampen resonances
 
 M955 P120.0 I01
 ;M955 P0 C"spi.cs1+spi.cs0" I25; all wires connected to temp DB connector, no temperature daughterboard
@@ -134,9 +133,11 @@ M501
 ;M581 P2 T4 S1 R0                             ; define trigger for filament auto unload triggers trigger4.g
 
 ; duet MFM
-M591 D0 P3 C"121.io1.in" S0 E10 R40:160                     ; define duet MFM sensor 
+M591 D0 P3 C"121.io1.in" S0 E6 R50:160                     ; define duet MFM sensor 
 
 ;Tapper out bed compensation H ... mm 
 M376 H1
+
+M309 S0.022 P0				; material feedforward
 
 M98 P"globals.g"                             ; Load Global variables
